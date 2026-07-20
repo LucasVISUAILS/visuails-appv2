@@ -1,0 +1,270 @@
+<script>
+  // VISUAILS — order lifestyle visuals. Ported from static /order-lifestyle.html:
+  // a 3-step order wizard (contact -> product/format/model -> quality/delivery)
+  // with a live running total. All steps live inside one <form> and stay
+  // mounted the whole time (display toggled via a class, not {#if}) so field
+  // values survive stepping back and forth — the same behaviour as the
+  // static site's `hidden`-attribute step panels.
+  //
+  // NOTE: adapter-static means there is no backend anywhere in this project
+  // (same as the current live static site). The final "Submit" button here
+  // is a real submit that GETs to /thank-you (mirroring order-catalog.html's
+  // `<form action="thank-you.html" method="get">` pattern) — the static
+  // source instead just did `onclick="location.href='thank-you.html'"`
+  // without submitting any field data at all, so this is a faithful
+  // improvement, not a regression. Either way no data is actually received
+  // or stored, and a GET form can't carry the uploaded photos regardless —
+  // replace with a real form endpoint (Formspree, a Cloudflare Pages
+  // Function, etc.) before launch.
+  import { reveal } from '$lib/actions/reveal.js';
+  import ProductScene from '$lib/components/site/ProductScene.svelte';
+
+  const roster = ['Aaron', 'Ava', 'Lila', 'Sam', 'Morgan', 'Dasha', 'Elias', 'Ryan', 'Rose'];
+
+  let step = $state(1);
+  let qty = $state('1');
+  let format = $state('1:1');
+  let quality = $state('2K');
+  let delivery = $state('Standard');
+
+  let formatAdd = $derived(format === 'Multi Format Export' ? 19.99 : 0);
+  let qualityAdd = $derived(quality === '4K' ? 9.99 : 0);
+  let deliveryAdd = $derived(delivery === 'Priority' ? 29.99 : 0);
+  let total = $derived(Number(qty) * 35 + formatAdd + qualityAdd + deliveryAdd);
+  let totalLabel = $derived(`€${Number.isInteger(total) ? total : total.toFixed(2)}`);
+</script>
+
+<svelte:head>
+  <title>Order lifestyle visuals — VISUAILS</title>
+  <meta name="description" content="Order styled, real-world lifestyle visuals with optional consistent models. Starting from €35 per visual, checkout in three quick steps." />
+</svelte:head>
+
+<section class="page-hero" style="padding-bottom:0">
+  <div class="container">
+    <p class="eyebrow-page"><a href="/order" style="color:inherit">&larr; All ordering options</a></p>
+  </div>
+</section>
+
+<section id="lifestyle" class="ord-anchor section-tight">
+  <div class="container narrow">
+    <div class="section-head">
+      <span class="kicker">Lifestyle</span>
+      <h2 style="margin-top:.8rem">Order lifestyle visuals</h2>
+      <p>Styled, real-world scenes with optional consistent models — checkout in three quick steps.</p>
+    </div>
+    <div class="card reveal pending" use:reveal style="padding:clamp(1.4rem,3vw,2.4rem)">
+      <div style="margin-bottom:1.4rem;max-height:180px;overflow:hidden;border-radius:var(--r-media)">
+        <ProductScene icon="jar" width="40%" badge="Lifestyle &middot; Glow" wide />
+      </div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.6rem;margin-bottom:.9rem">
+        <h3 style="margin:0">Place your order</h3>
+        <strong style="color:var(--accent-bright)">Starting from &euro;35 / visual</strong>
+      </div>
+      <div class="chip-row" style="margin-bottom:1.4rem">
+        <span class="chip"><span class="dot"></span>Secure checkout</span>
+        <span class="chip"><span class="dot"></span>Delivered within ~24 hours</span>
+        <span class="chip"><span class="dot"></span>No subscription required</span>
+      </div>
+
+      <form action="/thank-you" method="get">
+        <div class="progress" aria-hidden="true"><i style="width:{(step / 3) * 100}%"></i></div>
+
+        <!-- STEP 1 · Contact -->
+        <div class:hidden-step={step !== 1}>
+          <h4 style="margin-bottom:1.2rem">Step 1 &middot; Contact</h4>
+          <div class="field">
+            <label for="ls-name">Name <span class="req">*</span></label>
+            <input class="input" type="text" id="ls-name" name="name" autocomplete="name" required />
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label for="ls-company">Company <span class="req">*</span></label>
+              <input class="input" type="text" id="ls-company" name="company" autocomplete="organization" required />
+            </div>
+            <div class="field">
+              <label for="ls-web">Website</label>
+              <input class="input" type="url" id="ls-web" name="website" placeholder="https://" autocomplete="url" />
+            </div>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label for="ls-email">Email <span class="req">*</span></label>
+              <input class="input" type="email" id="ls-email" name="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="ls-phone">Phone <span class="req">*</span></label>
+              <input class="input" type="tel" id="ls-phone" name="phone" autocomplete="tel" placeholder="+31 6 &hellip;" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="ls-vat">VAT number</label>
+            <input class="input" type="text" id="ls-vat" name="vat" />
+            <span class="hint">Optional — speeds up invoicing if you have one.</span>
+          </div>
+          <div class="flex" style="justify-content:flex-end;margin-top:.4rem">
+            <button type="button" class="btn btn-primary" onclick={() => (step = 2)}>Next
+              <svg viewBox="0 0 24 24" class="i"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2 · Product, format & model -->
+        <div class:hidden-step={step !== 2}>
+          <h4 style="margin-bottom:1.2rem">Step 2 &middot; Product, format &amp; model</h4>
+
+          <div class="field">
+            <label for="ls-qty">Different product quantity <span class="req">*</span></label>
+            <select class="select" id="ls-qty" name="quantity" bind:value={qty} required>
+              <option value="1">1 product</option>
+              <option value="2">2 products</option>
+              <option value="3">3 products</option>
+              <option value="4">4 products</option>
+              <option value="5">5 products</option>
+            </select>
+            <span class="hint">Price scales per product. Add-ons below apply once per order.</span>
+          </div>
+
+          <div class="field">
+            <label for="ls-upload">Upload product photos <span class="req">*</span></label>
+            <label class="dropzone" for="ls-upload">
+              <svg viewBox="0 0 24 24" class="i"><path d="M12 16V4M6 10l6-6 6 6M4 20h16" /></svg>
+              <div><strong>Click to upload</strong> or drag files here</div>
+              <div class="hint" style="margin-top:.4rem">One clear photo per product is enough to get started.</div>
+              <input type="file" id="ls-upload" name="photos" accept="image/*" multiple hidden />
+            </label>
+          </div>
+
+          <div class="field">
+            <label>Choose format export <span class="req">*</span></label>
+            <label class="opt"><input type="radio" name="format" value="1:1" bind:group={format} required /><span class="opt-main"><span class="opt-title">1:1 — Square</span><span class="opt-desc">Marketplaces, product grids, ads.</span></span><span class="opt-price">&euro;0</span></label>
+            <label class="opt"><input type="radio" name="format" value="4:5" bind:group={format} /><span class="opt-main"><span class="opt-title">4:5 — Portrait</span><span class="opt-desc">Instagram feed, product pages.</span></span><span class="opt-price">&euro;0</span></label>
+            <label class="opt"><input type="radio" name="format" value="9:16" bind:group={format} /><span class="opt-main"><span class="opt-title">9:16 — Vertical</span><span class="opt-desc">Stories, Reels, TikTok.</span></span><span class="opt-price">&euro;0</span></label>
+            <label class="opt"><input type="radio" name="format" value="16:9" bind:group={format} /><span class="opt-main"><span class="opt-title">16:9 — Wide</span><span class="opt-desc">Banners, hero sections.</span></span><span class="opt-price">&euro;0</span></label>
+            <label class="opt"><input type="radio" name="format" value="Multi Format Export" bind:group={format} /><span class="opt-main"><span class="opt-title">Multi Format Export (all 4)</span><span class="opt-desc">Every ratio above, delivered together.</span></span><span class="opt-price">+&euro;19.99</span></label>
+          </div>
+
+          <div class="field">
+            <label>Choose model <span class="req">*</span></label>
+            <div class="choice-grid">
+              {#each roster as m, i}
+                <label class="choice">
+                  <input type="radio" name="model" value={m} required={i === 0} />
+                  <div class="choice-media mono"><div class="mono-av">{m[0]}<small>{m}</small></div></div>
+                  <div class="choice-label">{m}</div>
+                </label>
+              {/each}
+              <label class="choice">
+                <input type="radio" name="model" value="VISUAILS choose" />
+                <div class="choice-media mono"><div class="mono-av"><svg viewBox="0 0 24 24" class="i" style="width:26px;height:26px;color:var(--accent-bright)"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21.4 8 14 2 9.4h7.6z" /></svg></div></div>
+                <div class="choice-label">Let VISUAILS choose</div>
+              </label>
+            </div>
+          </div>
+
+          <div class="card" style="background:var(--accent-soft);border-color:var(--accent-line)">
+            <h4 style="margin-bottom:.7rem">For best results</h4>
+            <ul class="checklist">
+              <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5" /></svg><span>A clear front image of each product</span></li>
+              <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5" /></svg><span>Close-ups for any detail that matters</span></li>
+              <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5" /></svg><span>Good lighting and a clean background</span></li>
+            </ul>
+          </div>
+
+          <div class="flex" style="justify-content:space-between;margin-top:1.2rem">
+            <button type="button" class="btn btn-ghost" onclick={() => (step = 1)}>
+              <svg viewBox="0 0 24 24" class="i" style="transform:rotate(180deg)"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              Back
+            </button>
+            <button type="button" class="btn btn-primary" onclick={() => (step = 3)}>Next
+              <svg viewBox="0 0 24 24" class="i"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3 · Quality & delivery -->
+        <div class:hidden-step={step !== 3}>
+          <h4 style="margin-bottom:1.2rem">Step 3 &middot; Quality &amp; delivery</h4>
+
+          <div class="field">
+            <label>Export quality <span class="req">*</span></label>
+            <label class="opt"><input type="radio" name="quality" value="2K" bind:group={quality} required /><span class="opt-main"><span class="opt-title">2K — Included</span><span class="opt-desc">Crisp, ready for web and marketplaces.</span></span><span class="opt-price">&euro;0</span></label>
+            <label class="opt"><input type="radio" name="quality" value="4K" bind:group={quality} /><span class="opt-main"><span class="opt-title">4K — Ultra high-resolution</span><span class="opt-desc">&asymp;&euro;2 per visual when ordering 5.</span></span><span class="opt-price">+&euro;9.99</span></label>
+          </div>
+
+          <div class="field">
+            <label>Delivery <span class="req">*</span></label>
+            <label class="opt"><input type="radio" name="delivery" value="Standard" bind:group={delivery} required /><span class="opt-main"><span class="opt-title">Standard</span><span class="opt-desc">Delivered in the normal queue.</span></span><span class="opt-price">&euro;0</span></label>
+            <label class="opt"><input type="radio" name="delivery" value="Priority" bind:group={delivery} /><span class="opt-main"><span class="opt-title">Priority — top of the queue</span><span class="opt-desc">We move your order to the front.</span></span><span class="opt-price">+&euro;29.99</span></label>
+          </div>
+          <p class="hint" style="margin-bottom:1.4rem">We aim to deliver within ~24 hours (may vary during busy periods).</p>
+
+          <div class="flex" style="justify-content:space-between;margin-top:.4rem;align-items:center">
+            <button type="button" class="btn btn-ghost" onclick={() => (step = 2)}>
+              <svg viewBox="0 0 24 24" class="i" style="transform:rotate(180deg)"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              Back
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg">Submit <span>{totalLabel}</span></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container">
+    <div class="section-head">
+      <h2 style="font-size:1.4rem">Looking for something else?</h2>
+    </div>
+    <div class="chip-row">
+      <a href="/order-catalog" class="chip">Catalog</a>
+      <a href="/order-video" class="chip">Video</a>
+      <a href="/order-custom" class="chip">Custom styling</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Order-form controls — page-scoped (see order-catalog/+page.svelte for
+     the same block; duplicated per-route rather than added to app.css). */
+  .narrow { max-width: 820px; }
+  .hidden-step { display: none; }
+  .field { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1.1rem; }
+  .field label { font-size: 0.88rem; font-weight: 600; color: var(--ink); }
+  .req { color: var(--accent-bright); }
+  .hint { font-size: 0.8rem; color: var(--ink-3); }
+  .input, .select { width: 100%; padding: 0.85rem 1rem; background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r-sm); color: var(--ink); transition: border-color 0.22s var(--ease), box-shadow 0.22s var(--ease); font-size: 0.98rem; font-family: var(--font-body); }
+  .input:focus, .select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .select option { background: var(--surface); color: var(--ink); }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  @media (max-width: 620px) { .row-2 { grid-template-columns: 1fr; } }
+  .choice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.8rem; }
+  .choice { position: relative; border-radius: var(--r-sm); overflow: hidden; cursor: pointer; border: 1px solid var(--line-strong); transition: transform 0.24s var(--ease), border-color 0.24s var(--ease); background: var(--surface); display: block; }
+  .choice:hover { transform: translateY(-2px); border-color: var(--accent-line); }
+  .choice input { position: absolute; opacity: 0; pointer-events: none; }
+  .choice .choice-media { position: relative; aspect-ratio: 1; background: var(--bg-deep); overflow: hidden; }
+  .choice .choice-label { padding: 0.6rem 0.7rem; font-size: 0.85rem; color: var(--ink); font-weight: 500; }
+  .choice:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .choice:has(input:checked)::after { content: "\2713"; position: absolute; top: 8px; right: 8px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 0.8rem; font-weight: 700; }
+  .mono { display: grid; place-items: center; background: radial-gradient(125% 90% at 50% 6%, #FFFFFF, #F1EBE3 58%, #E2D9CD 100%); }
+  .mono .mono-av { position: relative; display: grid; place-items: center; width: 100%; height: 100%; font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 1.4rem; color: var(--accent-bright); }
+  .mono .mono-av small { position: absolute; bottom: 8px; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); font-family: var(--font-body); font-style: normal; }
+  .opt { display: flex; align-items: center; gap: 0.8rem; padding: 0.9rem 1.1rem; border-radius: var(--r-sm); border: 1px solid var(--line-strong); cursor: pointer; transition: border-color 0.2s var(--ease), background 0.2s var(--ease); margin-bottom: 0.6rem; background: var(--surface); }
+  .opt:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+  .opt input { accent-color: var(--accent); width: 18px; height: 18px; flex: none; }
+  .opt .opt-main { flex: 1; }
+  .opt .opt-title { color: var(--ink); font-weight: 500; }
+  .opt .opt-desc { font-size: 0.82rem; color: var(--ink-3); }
+  .opt .opt-price { color: var(--accent-bright); font-weight: 700; font-size: 0.9rem; }
+  .dropzone { display: block; border-radius: var(--r-sm); padding: 1.8rem; text-align: center; color: var(--ink-3); border: 1.5px dashed var(--line-strong); transition: border-color 0.22s var(--ease), background 0.22s var(--ease); cursor: pointer; background: var(--surface); }
+  .dropzone:hover { border-color: var(--accent-line); background: var(--accent-soft); }
+  .dropzone svg { width: 30px; height: 30px; margin: 0 auto 0.6rem; color: var(--accent-bright); }
+  .progress { height: 3px; background: var(--surface-2); border-radius: var(--r-pill); overflow: hidden; margin-bottom: 1.6rem; }
+  .progress > i { display: block; height: 100%; background: var(--accent); transition: width 0.5s var(--ease); }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .chip { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.4rem 0.9rem; border-radius: var(--r-pill); border: 1px solid var(--line); font-size: 0.8rem; color: var(--ink-2); }
+  .chip .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+  a.chip { transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease); }
+  a.chip:hover { border-color: var(--accent-line); color: var(--ink); }
+  .ord-anchor { scroll-margin-top: 100px; }
+</style>

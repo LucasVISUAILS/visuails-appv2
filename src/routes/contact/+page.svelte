@@ -1,0 +1,163 @@
+<script>
+  // VISUAILS — Contact page. Ported from /tmp/visuails-web/contact.html.
+  // Header/footer/nav live in +layout.svelte; this file is page content only.
+  //
+  // NOTE: this is a fully static site (adapter-static, no server) — the form
+  // below has no backend wired up yet. It posts to /thank-you via a GET
+  // request, exactly the "form posts to a static thank-you page" pattern the
+  // current live static site already uses (see order-catalog.html), so this
+  // is not a regression. Wire this to a real form endpoint (e.g. Formspree,
+  // a Cloudflare Pages Function) before relying on it for real leads.
+  import { reveal } from '$lib/actions/reveal.js';
+</script>
+
+<svelte:head>
+  <title>VISUAILS — Contact us</title>
+  <meta name="description" content="Questions about an order, support, or a custom request? Message VISUAILS on WhatsApp or email hello@visuails.com — we usually reply within the hour." />
+</svelte:head>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow-page">Contact</span>
+    <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem)">Let's grow together</h1>
+    <p class="lead" style="margin-top:1.2rem">A question about your order, need support, or a custom request? Send us a message and we'll get back to you as soon as possible.</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section-tight">
+  <div class="container two-col" style="align-items:start">
+
+    <!-- Left: channels -->
+    <div class="reveal pending contact-stack" use:reveal>
+      <div>
+        <span class="kicker">Talk to us</span>
+        <h2 style="margin-top:.8rem">The fastest way to reach us</h2>
+        <p style="margin-top:1rem;color:var(--ink-3);max-width:66ch">Prefer chat, email, or a quick form? Whatever suits you — a real person reads every message.</p>
+      </div>
+
+      <div class="card">
+        <h3>WhatsApp</h3>
+        <p style="margin-top:.5rem;color:var(--ink-3)">Usually replies within the hour. The quickest route for orders, questions and custom requests.</p>
+        <p style="margin-top:.6rem"><strong>+31 6 25436130</strong></p>
+        <a href="https://wa.me/31625436130?text=Hi%20VISUAILS%2C%20I%20have%20a%20question." class="btn btn-wa" style="margin-top:1rem" target="_blank" rel="noopener">
+          <svg class="i" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 20l1.5-4.5A8.38 8.38 0 0 1 3.5 11 8.5 8.5 0 0 1 12 3a8.38 8.38 0 0 1 8.5 8.5z"/></svg>
+          Chat on WhatsApp <span class="rec-badge">Fastest</span>
+        </a>
+      </div>
+
+      <div class="card">
+        <h3>Email</h3>
+        <p style="margin-top:.5rem;color:var(--ink-3)">For detailed briefs, invoices or attachments.</p>
+        <p style="margin-top:.6rem">
+          <a href="mailto:hello@visuails.com" class="link-arrow" style="font-size:1rem">hello@visuails.com <svg viewBox="0 0 24 24" class="i"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </p>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3 style="font-size:.95rem">Opening hours</h3>
+          <p style="margin-top:.5rem;font-size:.95rem;color:var(--ink-3)">Mon–Fri 08:00–20:00 CET<br>Sat–Sun 09:00–20:00 CET</p>
+        </div>
+        <div class="card">
+          <h3 style="font-size:.95rem">Location</h3>
+          <p style="margin-top:.5rem;font-size:.95rem;color:var(--ink-3)">Enschede, Netherlands<br>KVK 99742993</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div class="reveal pending" use:reveal>
+      <div class="card">
+        <h2 style="font-size:1.5rem">Send a message</h2>
+        <p style="margin-top:.5rem;color:var(--ink-3);font-size:.95rem">We'll reply by your preferred channel, usually the same day.</p>
+
+        <!-- No backend yet (static site, no server) — see file-top note. -->
+        <form action="/thank-you" method="get" style="margin-top:1.6rem" novalidate>
+          <div class="field">
+            <label for="c-name">Name <span class="req">*</span></label>
+            <input class="input" type="text" id="c-name" name="name" required autocomplete="name" placeholder="Your name" />
+          </div>
+          <div class="field">
+            <label for="c-email">Email <span class="req">*</span></label>
+            <input class="input" type="email" id="c-email" name="email" required autocomplete="email" placeholder="you@company.com" />
+          </div>
+          <div class="field">
+            <label for="c-topic">Topic</label>
+            <select class="select" id="c-topic" name="topic">
+              <option value="order-support">Order support</option>
+              <option value="new-order">New order</option>
+              <option value="custom-request">Custom request</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-message">Message <span class="req">*</span></label>
+            <textarea class="textarea" id="c-message" name="message" rows="5" required placeholder="How can we help?"></textarea>
+          </div>
+          <div class="field">
+            <span id="preferred-label">Preferred contact method</span>
+            <div class="opt-stack" style="margin-top:.4rem" role="radiogroup" aria-labelledby="preferred-label">
+              <label class="opt">
+                <input type="radio" name="preferred" value="email" checked />
+                <span class="opt-main"><span class="opt-title">Email</span><span class="opt-desc">We reply to hello@visuails.com threads</span></span>
+              </label>
+              <label class="opt">
+                <input type="radio" name="preferred" value="whatsapp" />
+                <span class="opt-main"><span class="opt-title">WhatsApp</span><span class="opt-desc">Fastest — usually within the hour</span></span>
+              </label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:1.2rem">Send message</button>
+          <p style="margin-top:.8rem;font-size:.8rem;color:var(--ink-3)">Looking for quick answers? Check the <a href="/faq" style="color:var(--accent-bright);text-decoration:underline">FAQ</a> first.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-tight">
+  <div class="container">
+    <div class="cta-band reveal pending" use:reveal>
+      <h2 class="display" style="font-size:clamp(2rem,4.5vw,3.2rem)">Rather see it first?</h2>
+      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Try a free test sample — one photo in, a finished visual out. No card needed.</p>
+      <div class="flex" style="justify-content:center;margin-top:2rem">
+        <a href="/test-sample" class="btn btn-primary btn-lg">Free test sample</a>
+        <a href="/pricing" class="btn btn-ghost btn-lg">See pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Contact-page-only: vertical stack spacing for the left column, and the
+     form-field system (label/input/select/textarea/radio-option) — not
+     part of app.css yet, kept page-scoped per DESIGN.md's shadcn-svelte
+     note (this form is a good future candidate for shadcn form primitives). */
+  .contact-stack > * + * { margin-top: 1.2rem; }
+
+  .field { display: flex; flex-direction: column; gap: .45rem; margin-bottom: 1.1rem; }
+  .field label, .field span#preferred-label { font-size: .88rem; font-weight: 600; color: var(--ink); }
+  .field .req { color: var(--accent-bright); }
+
+  .input, .textarea, .select {
+    width: 100%; padding: .85rem 1rem; background: var(--surface);
+    border: 1px solid var(--line-strong); border-radius: var(--r-sm); color: var(--ink);
+    font-family: var(--font-body); font-size: .98rem;
+    transition: border-color .22s var(--ease), box-shadow .22s var(--ease);
+  }
+  .input::placeholder, .textarea::placeholder { color: var(--ink-3); }
+  .input:focus, .textarea:focus, .select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .select option { background: var(--surface); color: var(--ink); }
+  .textarea { min-height: 120px; resize: vertical; }
+
+  .opt-stack { display: flex; flex-direction: column; gap: .6rem; }
+  .opt { display: flex; align-items: center; gap: .8rem; padding: .9rem 1.1rem; border-radius: var(--r-sm); border: 1px solid var(--line-strong); background: var(--surface); cursor: pointer; transition: border-color .2s var(--ease), background .2s var(--ease); }
+  .opt:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+  .opt input { accent-color: var(--accent); width: 18px; height: 18px; }
+  .opt .opt-main { flex: 1; display: flex; flex-direction: column; }
+  .opt .opt-title { color: var(--ink); font-weight: 500; }
+  .opt .opt-desc { font-size: .82rem; color: var(--ink-3); }
+</style>
