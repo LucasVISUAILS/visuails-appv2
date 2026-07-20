@@ -14,7 +14,20 @@ const config = {
       fallback: undefined,
       precompress: false,
       strict: true
-    })
+    }),
+    prerender: {
+      handleHttpError: ({ path, message }) => {
+        // The real product photos aren't uploaded to static/img/ yet (same
+        // gap flagged since the first delivery in this project) — don't let
+        // a missing photo fail the whole build. Any OTHER broken link still
+        // fails loudly, since that would be a real bug, not a missing asset.
+        if (path.startsWith('/img/')) {
+          console.warn(`Missing image (expected until real photos are uploaded): ${path}`);
+          return;
+        }
+        throw new Error(message);
+      }
+    }
   }
 };
 
