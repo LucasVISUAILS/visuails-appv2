@@ -64,12 +64,18 @@
   <meta name="description" content="Answers about getting started, ordering, delivery, pricing and usage rights for VISUAILS AI product visuals — honest, clear and no fine print." />
 </svelte:head>
 
-<!-- HERO -->
+<!-- HERO — real photo beside a short line, not a text wall. -->
 <section class="page-hero">
   <div class="container">
-    <span class="eyebrow-page">FAQ</span>
-    <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem)">Questions, answered</h1>
-    <p class="lead" style="margin-top:1.2rem">Everything you might want to know before you order — how it works, what it costs, how fast it lands and what you're free to do with the results. Still unsure? Message us on WhatsApp anytime.</p>
+    <div class="photo-split reverse">
+      <div class="photo-split-media">
+        <img src="/img/lifestyle-flash-05.webp" alt="A VISUAILS lifestyle visual" loading="lazy" />
+      </div>
+      <div>
+        <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem)">Questions, <em>answered</em>.</h1>
+        <p class="lead" style="margin-top:1rem">How it works, what it costs, how fast it lands. Still unsure? Message us on WhatsApp.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -105,8 +111,8 @@
 <section>
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
-      <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Still have a question?</h2>
-      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Message us on WhatsApp — we usually reply within the hour — or start with a free test sample.</p>
+      <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Still have a <em>question</em>?</h2>
+      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Message us on WhatsApp — we usually reply within the hour.</p>
       <div class="flex" style="justify-content:center;margin-top:2rem">
         <a href="/test-sample" class="btn btn-primary btn-lg">Free test sample</a>
         <a href="/contact" class="btn btn-ghost btn-lg">Contact us</a>

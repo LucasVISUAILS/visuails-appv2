@@ -16,7 +16,7 @@
 <section class="page-hero"><div class="container" style="max-width:720px;text-align:center;margin-inline:auto">
   <span class="eyebrow-page">Request received</span>
   <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem)">Thanks — we've got your request.</h1>
-  <p class="lead" style="margin:1.2rem auto 0">We'll get back to you within about 24 hours — usually faster on WhatsApp. In the meantime, a quick check of your product photos against our guidelines makes a real difference to the result.</p>
+  <p class="lead" style="margin:1.2rem auto 0">We'll get back to you within about 24 hours — usually faster on WhatsApp.</p>
   <div class="flex" style="justify-content:center;margin-top:2rem">
     <a href="/upload-guidelines" class="btn btn-primary btn-lg">Read upload guidelines</a>
     <a href="/" class="btn btn-ghost btn-lg">Back to home</a>

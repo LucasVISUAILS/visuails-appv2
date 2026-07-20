@@ -30,7 +30,7 @@
       <div class="field"><label for="omail">Email <span class="req">*</span></label><input class="input" id="omail" type="email" name="omail" placeholder="you@example.com" required /></div>
     </div>
     <button type="button" class="btn btn-primary">Check status</button>
-    <p class="hint" style="margin-top:.8rem">This is a preview of order tracking. Full self-service tracking arrives together with accounts — for now, the timeline below shows how it works.</p>
+    <p class="hint" style="margin-top:.8rem">Preview only — full self-service tracking arrives with accounts. The timeline below shows how it works.</p>
   </form>
   <div class="card reveal pending" use:reveal>
     <h3>Example: order VIS-10428</h3>

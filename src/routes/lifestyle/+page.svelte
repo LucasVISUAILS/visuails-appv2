@@ -1,6 +1,7 @@
 <script>
-  // VISUAILS — lifestyle hub: the 4 style cards + supporting sections.
-  // Ported from lifestyle.html.
+  // VISUAILS — lifestyle hub. v2 redesign: photo-led, one eyebrow max,
+  // real style photography instead of ProductScene wherever it exists
+  // (styles.js already carries the correct real photo per style).
   import { reveal } from '$lib/actions/reveal.js';
   import { magnetic } from '$lib/actions/magnetic.js';
   import { compare } from '$lib/actions/compare.js';
@@ -8,11 +9,11 @@
   import { styles } from '$lib/data/styles.js';
 
   const marqueeItems = [
-    { icon: 'bottle', width: '42%', label: 'Phone-made' },
-    { icon: 'jar', width: '46%', label: 'Glow' },
-    { icon: 'sneaker', width: '56%', label: 'Flash' },
-    { icon: 'bag', width: '46%', label: 'Dunes' },
-    { icon: 'jar', width: '44%', label: 'Editorial' },
+    { src: '/img/lifestyle-phone-made-06.webp', label: 'Phone-made' },
+    { src: '/img/lifestyle-glow-03.webp', label: 'Glow' },
+    { src: '/img/lifestyle-flash-05.webp', label: 'Flash' },
+    { src: '/img/lifestyle-dunes-02.webp', label: 'Dunes' },
+    { src: '/img/banners-02.webp', label: 'Campaign' },
   ];
 </script>
 
@@ -25,7 +26,7 @@
   <div class="container">
     <span class="eyebrow-page">Lifestyle Images</span>
     <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem);margin-top:1rem">Your product, in scenes that sell</h1>
-    <p class="lead" style="margin-top:1.2rem">Real, styled scenes with natural lighting — and optional consistent models. From €35 per visual.</p>
+    <p class="lead" style="margin-top:1.2rem">Four signature styles. From €35 per visual.</p>
     <div class="flex" style="margin-top:1.8rem">
       <span class="magnet-wrap" use:magnetic><span class="magnet-inner"><a href="/order-lifestyle" class="btn btn-primary btn-lg">Order lifestyle visuals</a></span></span>
       <a href="/pricing" class="btn btn-ghost btn-lg">See pricing</a>
@@ -35,76 +36,47 @@
       </a>
     </div>
     <div class="trust-row" style="margin-top:2.4rem">
-      <span class="trust-item"><strong>From €35</strong> per lifestyle visual</span>
+      <span class="trust-item"><strong>From €35</strong> per visual</span>
       <span class="trust-item"><strong>~24h</strong> delivery</span>
       <span class="trust-item"><strong>100%</strong> human-reviewed</span>
     </div>
   </div>
 </section>
 
-<!-- Style cards -->
+<!-- Style cards — the photo does the pitching -->
 <section>
   <div class="container">
-    <div class="section-head">
-      <span class="kicker">Four lifestyle styles</span>
-      <h2 style="margin-top:.8rem">Choose the mood that matches your brand.</h2>
-    </div>
+    <h2 style="margin-bottom:2rem">Four moods. Pick yours.</h2>
     <div class="grid grid-2">
       {#each styles as s}
-        <div class="svc card-hover reveal pending" use:reveal>
-          <div class="svc-media"><ProductScene photo={s.cardPhoto} icon={s.cardIcon} width="44%" badge="Lifestyle &middot; {s.name}" wide /></div>
-          <div class="svc-body">
-            <h3><em>{s.name}</em></h3>
-            <span class="svc-price">€35 / visual</span>
-            <p>{s.cardDesc}</p>
-            <div class="flex" style="margin-top:1.2rem">
-              <a href="/lifestyle/{s.slug}" class="btn btn-primary">Explore {s.name}</a>
-              <a href="https://wa.me/31625436130?text=Hi%20VISUAILS%2C%20I%27d%20like%20to%20order%20a%20{s.name}%20lifestyle%20visual." class="btn btn-wa" target="_blank" rel="noopener">
-                <svg class="i" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 20l1.5-4.5A8.38 8.38 0 0 1 3.5 11 8.5 8.5 0 0 1 12 3a8.38 8.38 0 0 1 8.5 8.5z"/></svg>
-                Order via WhatsApp
-              </a>
+        <a href="/lifestyle/{s.slug}" class="reveal pending" use:reveal style="display:block">
+          <div class="photo-band tall">
+            <img src={s.cardPhoto} alt="{s.name} lifestyle example" loading="lazy" />
+            <div class="scrim"></div>
+            <div class="caption">
+              <h3 style="color:#fff;font-size:1.6rem"><em>{s.name}</em> &rarr;</h3>
+              <p style="font-size:.92rem">{s.tagline} &middot; €35 / visual</p>
             </div>
           </div>
-        </div>
+        </a>
       {/each}
     </div>
   </div>
 </section>
 
-<!-- Features -->
-<section class="section-tight">
-  <div class="container two-col">
-    <div class="reveal pending" use:reveal>
-      <span class="kicker" style="color:var(--accent-bright)">Every style includes</span>
-      <h2 style="margin-top:1rem">Made to look real — and ready to publish.</h2>
-      <p class="lead" style="margin-top:1.2rem">Whichever mood you pick, each lifestyle visual comes with the same production standard, so your feed and product pages stay coherent from the first order.</p>
-    </div>
-    <div class="reveal pending card" use:reveal style="border-color:var(--accent-line)">
-      <ul class="checklist">
-        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>High-res export</span></li>
-        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>Natural product integration</span></li>
-        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>Consistent visual style</span></li>
-        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>E-commerce ready</span></li>
-        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>~24h delivery</span></li>
-        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>Human-reviewed</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
 <!-- Models teaser -->
-<section>
-  <div class="container two-col">
-    <div class="reveal pending" use:reveal>
-      <ProductScene photo="/img/banners-01.webp" icon="bag" width="46%" badge="Consistent model &middot; whole collection" wide />
-    </div>
-    <div class="reveal pending" use:reveal>
-      <span class="kicker" style="color:var(--accent-bright)">Add a consistent model</span>
-      <h2 style="margin-top:1rem">Same face, across the whole collection.</h2>
-      <p class="lead" style="margin-top:1.2rem">Want your product worn or held? Add a consistent model that carries the same face across an entire collection — or let VISUAILS choose a model that fits your brand. Either way, your campaign feels like one coherent shoot.</p>
-      <div class="flex" style="margin-top:1.6rem">
-        <a href="/models" class="btn btn-primary">Explore models</a>
-        <a href="/models" class="link-arrow">See how consistent models work <svg viewBox="0 0 24 24" class="i"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<section class="section-tight">
+  <div class="container">
+    <div class="photo-split reveal pending" use:reveal>
+      <div class="photo-split-media">
+        <img src="/img/model-02.webp" alt="A VISUAILS model, styled consistently across a campaign" loading="lazy" />
+      </div>
+      <div>
+        <h2>Add a consistent <em>model.</em></h2>
+        <p class="lead" style="margin-top:1rem">Same face, across your whole collection — or let us choose one that fits.</p>
+        <div class="flex" style="margin-top:1.4rem">
+          <a href="/models" class="btn btn-primary">Explore models</a>
+        </div>
       </div>
     </div>
   </div>
@@ -113,16 +85,13 @@
 <!-- Before / after -->
 <section class="section-tight">
   <div class="container">
-    <div class="section-head">
-      <h2>One product photo. A styled scene out.</h2>
-      <p>Drag to compare a plain product shot with a finished lifestyle visual.</p>
-    </div>
-    <div style="max-width:640px;margin:0 auto;text-align:center">
+    <h2 style="text-align:center">One photo in. A styled scene out.</h2>
+    <div style="max-width:640px;margin:2rem auto 0;text-align:center">
       <div class="reveal-clip-wrap" use:reveal={{ variant: 'clip' }}>
         <div class="reveal-clip-inner">
-          <div class="ba" use:compare aria-label="Before and after: a plain jar photo transformed into a styled lifestyle visual">
+          <div class="ba" use:compare aria-label="Before and after: a plain product photo transformed into a styled lifestyle visual">
             <div class="ba-layer ba-before-scene" aria-hidden="true"><ProductScene icon="jar" width="46%" /></div>
-            <div class="ba-layer ba-after" aria-hidden="true"><ProductScene icon="jar" width="46%" /></div>
+            <div class="ba-layer ba-after" aria-hidden="true"><img src="/img/lifestyle-glow-05.webp" alt="The same product in a styled Glow-lit scene" /></div>
             <span class="ba-tag tag-before">Before</span>
             <span class="ba-tag tag-after">After</span>
             <div class="ba-handle" aria-hidden="true"></div>
@@ -136,18 +105,20 @@
   </div>
 </section>
 
-<!-- Marquee -->
+<!-- Marquee — a fast run of the real range -->
 <section class="section-tight">
   <div class="container">
     <div class="section-head" style="margin-bottom:1.8rem">
-      <h2>A feel for the lifestyle range</h2>
-      <p>From effortless phone-made to punchy editorial flash. <a href="/gallery" class="link-arrow" style="font-size:1rem">See the full gallery <svg viewBox="0 0 24 24" class="i"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+      <h2>The range, in motion</h2>
+      <p><a href="/gallery" class="link-arrow" style="font-size:1rem">See the full gallery <svg viewBox="0 0 24 24" class="i"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
     </div>
   </div>
   <div class="marquee">
     <div class="marquee-track">
       {#each marqueeItems as m}
-        <div class="marquee-item"><ProductScene icon={m.icon} width={m.width} badge="Lifestyle &middot; {m.label}" /></div>
+        <div class="marquee-item">
+          <img src={m.src} alt="{m.label} lifestyle example" loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+        </div>
       {/each}
     </div>
   </div>
@@ -158,7 +129,6 @@
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Put your product<br>in a scene that sells.</h2>
-      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Order styled lifestyle visuals from €35 each — with optional consistent models. Prefer to talk it through? We usually reply on WhatsApp within the hour.</p>
       <div class="flex" style="justify-content:center;margin-top:2rem">
         <span class="magnet-wrap" use:magnetic><span class="magnet-inner"><a href="/order-lifestyle" class="btn btn-primary btn-lg">Order lifestyle visuals</a></span></span>
         <a href="/models" class="btn btn-ghost btn-lg">Explore models</a>

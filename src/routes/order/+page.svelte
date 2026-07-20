@@ -24,7 +24,7 @@
   <div class="container">
     <span class="eyebrow-page">Order</span>
     <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem)">Place your order</h1>
-    <p class="lead" style="margin-top:1.2rem">Tell us what we're making for you — we handle everything from idea to finished file. Prefer to talk it through? Ordering via WhatsApp is always an option — we usually reply within the hour.</p>
+    <p class="lead" style="margin-top:1.2rem">Tell us what we're making — we handle it from idea to finished file. Prefer to talk it through? WhatsApp is always an option.</p>
     <div class="flex" style="margin-top:1.8rem">
       <a href="https://wa.me/31625436130?text=Hi%20VISUAILS%2C%20I%27d%20like%20to%20place%20an%20order." class="btn btn-wa btn-lg" target="_blank" rel="noopener">
         <svg class="i" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 20l1.5-4.5A8.38 8.38 0 0 1 3.5 11 8.5 8.5 0 0 1 12 3a8.38 8.38 0 0 1 8.5 8.5z"/></svg>
@@ -39,7 +39,7 @@
   <div class="container">
     <div class="section-head">
       <h2>What should we <em>make</em> for you?</h2>
-      <p>Pick a service and hand it over — concept, production and finishing are all on us. Everything is pay-per-order — no subscription.</p>
+      <p>Pick a service and hand it over — concept, production and finishing are on us. Pay-per-order, no subscription.</p>
     </div>
     <div class="hub-grid">
       {#each tiles as t}
@@ -61,7 +61,7 @@
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Not sure which fits?</h2>
-      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Send us your product and what you're after. We'll point you to the right option — no pressure, no subscription.</p>
+      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Send us your product and what you're after — we'll point you to the right option.</p>
       <div class="flex" style="justify-content:center;margin-top:2rem">
         <a href="/test-sample" class="btn btn-ghost btn-lg">Try a free sample first</a>
         <a href="https://wa.me/31625436130?text=Hi%20VISUAILS%2C%20I%27m%20not%20sure%20which%20option%20fits%20%E2%80%94%20can%20you%20help%3F" class="btn btn-wa btn-lg" target="_blank" rel="noopener">

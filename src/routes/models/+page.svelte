@@ -1,12 +1,11 @@
 <script>
-  // VISUAILS — Models hub. Ported from /tmp/visuails-web/models.html.
-  // Standard-model roster + custom-model teaser, using shared app.css
-  // utilities (page-hero, section-head, steps, checklist, cta-band …).
-  // Monogram avatars and chip pills are new patterns not in app.css, so
-  // they're scoped locally rather than touching the shared stylesheet.
+  // VISUAILS — Models hub. v2 redesign: leads with the real model portraits
+  // (model-01/02/03) instead of text-only monogram avatars, one eyebrow max,
+  // copy cut hard. The monogram roster stays for the functional "pick a
+  // model" grid — there's no unique real photo for all 10 library entries,
+  // only 3 example portraits, so those 3 carry the photography up top.
   import { reveal } from '$lib/actions/reveal.js';
   import { magnetic } from '$lib/actions/magnetic.js';
-  import ProductScene from '$lib/components/site/ProductScene.svelte';
 
   const standardModels = [
     { initial: 'A', name: 'Aaron', traits: ['Warm', 'Approachable'] },
@@ -22,12 +21,14 @@
   ];
 
   const steps = [
-    { n: '01', title: 'Intake', body: "You share references and a brief on the look, age and vibe you're after." },
-    { n: '02', title: '2–3 directions', body: 'We design a few distinct model directions for you to react to.' },
-    { n: '03', title: 'You choose', body: 'Pick the face that fits your brand best — with a round of refinement.' },
-    { n: '04', title: 'Locked in', body: 'We lock the final model so it stays perfectly consistent going forward.' },
-    { n: '05', title: 'Used in every order', body: 'From then on, your model appears in every visual you order.' },
+    { n: '01', title: 'Intake', body: 'You share references and a brief on the look you want.' },
+    { n: '02', title: '2–3 directions', body: 'We design a few directions for you to react to.' },
+    { n: '03', title: 'You choose', body: 'Pick the face that fits, with one round of refinement.' },
+    { n: '04', title: 'Locked in', body: 'We lock the model so it stays perfectly consistent.' },
+    { n: '05', title: 'Used in every order', body: 'Your model appears in every visual from then on.' },
   ];
+
+  const modelPhotos = ['/img/model-01.webp', '/img/model-02.webp', '/img/model-03.webp'];
 </script>
 
 <svelte:head>
@@ -36,13 +37,29 @@
 </svelte:head>
 
 <section class="page-hero">
+  <div class="container two-col" style="align-items:center">
+    <div>
+      <p class="eyebrow-page">Models</p>
+      <h1 class="display" style="max-width:18ch">One face.<br />Every visual.</h1>
+      <p class="lead" style="margin-top:1.2rem">Pick a model from our library, or design one that's exclusively yours.</p>
+      <div class="flex" style="margin-top:1.8rem">
+        <a href="#standard" class="btn btn-primary btn-lg">Browse models</a>
+        <a href="/order-custom" class="btn btn-ghost btn-lg">Request a custom model</a>
+      </div>
+    </div>
+    <div class="photo-split-media" style="aspect-ratio:4/5">
+      <img src="/img/model-01.webp" alt="A VISUAILS model portrait" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- Real faces, up front -->
+<section class="section-tight">
   <div class="container">
-    <p class="eyebrow-page">Models</p>
-    <h1 class="display" style="max-width:22ch">Consistent models, across every visual</h1>
-    <p class="lead" style="margin-top:1.2rem">Pick a model from our library — or create a custom model that's exclusively yours. The same face, the same vibe, in every image you order.</p>
-    <div class="flex" style="margin-top:1.8rem">
-      <a href="#standard" class="btn btn-primary btn-lg">Browse standard models</a>
-      <a href="/order-custom" class="btn btn-ghost btn-lg">Request a custom model</a>
+    <div class="photo-grid reveal pending" use:reveal>
+      {#each modelPhotos as p, i}
+        <img src={p} alt="VISUAILS model portrait {i + 1}" loading="lazy" class={i === 0 ? 'wide' : ''} />
+      {/each}
     </div>
   </div>
 </section>
@@ -50,10 +67,7 @@
 <!-- STANDARD MODELS -->
 <section id="standard">
   <div class="container">
-    <div class="section-head">
-      <h2>Standard models</h2>
-      <p>A library of consistent faces you can reuse across your whole range. Standard models are included in the visual price — no extra fee.</p>
-    </div>
+    <h2 style="margin-bottom:2rem">Standard models</h2>
     <div class="grid models-grid">
       {#each standardModels as m}
         <div class="card card-hover model-card reveal pending" use:reveal>
@@ -70,12 +84,12 @@
         <div class="monogram monogram-accent" aria-hidden="true">
           <svg viewBox="0 0 24 24" class="i"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21.4 8 14 2 9.4h7.6z"/></svg>
         </div>
-        <h3>Let VISUAILS choose a model</h3>
-        <p style="font-size:.95rem;color:var(--ink-3)">Not sure who fits? Tell us your product and vibe, and we'll match a model from the library for you.</p>
+        <h3>Let us choose</h3>
+        <p style="font-size:.95rem;color:var(--ink-3)">Tell us your product and vibe — we'll match a model for you.</p>
         <a href="/order-lifestyle" class="link-arrow" style="color:var(--accent-bright)">Let us pick <svg viewBox="0 0 24 24" class="i"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
-    <p class="pill-note" style="margin-top:1.8rem">Standard models are included in the price of your visuals — no extra model fee.</p>
+    <p class="pill-note" style="margin-top:1.8rem">Standard models are included in your visual price — no extra fee.</p>
   </div>
 </section>
 
@@ -83,12 +97,10 @@
 <section id="custom" class="section-tight">
   <div class="container two-col">
     <div class="reveal pending" use:reveal>
-      <span class="kicker" style="color:var(--accent-bright)">Custom model</span>
-      <h2 style="margin-top:1rem">Your own custom model</h2>
-      <p class="lead" style="margin-top:1.2rem">A unique, exclusive model designed for your brand — then reused across every visual you ever order. One consistent face your customers will recognise.</p>
+      <h2>Your own <em>custom model.</em></h2>
+      <p class="lead" style="margin-top:1rem">An exclusive model built for your brand, reused across every visual you order.</p>
       <div class="chip-row" style="margin-top:1.6rem">
         <span class="chip"><span class="dot"></span>Exclusive to your brand</span>
-        <span class="chip"><span class="dot"></span>Reused across every order</span>
         <span class="chip"><span class="dot"></span>Locked in for consistency</span>
       </div>
       <div class="flex" style="margin-top:1.8rem">
@@ -100,8 +112,8 @@
       </div>
       <div style="margin-top:1.2rem"><a class="link-arrow" href="/custom-models">See directions &amp; full details <svg viewBox="0 0 24 24" class="i"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
     </div>
-    <div class="reveal pending" use:reveal>
-      <ProductScene photo="/img/banners-04.webp" icon="jar" width="44%" badge="One consistent face" wide />
+    <div class="photo-split-media reveal pending" use:reveal>
+      <img src="/img/custom-models-01.webp" alt="A VISUAILS custom model portrait" loading="lazy" />
     </div>
   </div>
 </section>
@@ -109,10 +121,7 @@
 <!-- HOW IT WORKS -->
 <section>
   <div class="container">
-    <div class="section-head">
-      <h2>How a custom model comes together</h2>
-      <p>A short, collaborative process — then your model is locked in for every future order.</p>
-    </div>
+    <h2 style="margin-bottom:2rem">How a custom model comes together</h2>
     <div class="steps">
       {#each steps as s}
         <div class="step reveal pending" use:reveal>
@@ -131,15 +140,15 @@
     <div class="card reveal pending" use:reveal>
       <h3>What you provide</h3>
       <ul class="checklist" style="margin-top:1.2rem">
-        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>A few <strong>references</strong> for the look you have in mind.</span></li>
-        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>The <strong>age, vibe and look</strong> that fits your brand.</span></li>
-        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>Any <strong>clothing</strong> or styling direction.</span></li>
-        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>Your <strong>do's and don'ts</strong> — anything to include or avoid.</span></li>
+        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>A few <strong>references</strong> for the look.</span></li>
+        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>The <strong>age, vibe and look</strong> you want.</span></li>
+        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>Any <strong>styling</strong> direction.</span></li>
+        <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5"/></svg><span>Your <strong>do's and don'ts.</strong></span></li>
       </ul>
     </div>
     <div class="card reveal pending" use:reveal style="border-color:var(--accent-line)">
       <h3>Pricing &amp; timing</h3>
-      <p class="measure" style="margin-top:1rem">A custom model is a <strong>one-time design fee</strong>, then it's yours to reuse across every future order at the normal visual price. Because we design the model up front, the <strong>first order has a longer lead time</strong> — after that, every order runs at the usual speed.</p>
+      <p class="measure" style="margin-top:1rem">A <strong>one-time design fee</strong>, then the normal visual price forever. The first order takes a little longer; every one after that runs at the usual speed.</p>
       <div class="flex" style="margin-top:1.6rem">
         <a href="/order-custom" class="btn btn-primary">Start your custom model</a>
         <a href="/pricing" class="link-arrow">See pricing <svg viewBox="0 0 24 24" class="i"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -153,7 +162,6 @@
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">One face. Every visual.<br />Perfectly <em>consistent.</em></h2>
-      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Start with a standard model today, or design a custom model that's exclusively yours. Not sure which fits? We're happy to help you decide.</p>
       <div class="flex" style="justify-content:center;margin-top:2rem">
         <a href="/order-custom" class="btn btn-primary btn-lg">Request a custom model</a>
         <a href="#standard" class="btn btn-ghost btn-lg">Browse standard models</a>
@@ -169,7 +177,7 @@
 <style>
   /* Models-page-only patterns: monogram avatars, trait chips, auto-fit
      roster grid. Not shared elsewhere, so kept local rather than added
-     to app.css. */
+     to app.css. v2: no italics anywhere (see DESIGN.md "Typography"). */
   .models-grid { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
 
   .model-card { display: flex; flex-direction: column; gap: .9rem; }
@@ -178,7 +186,7 @@
   .monogram {
     width: 60px; height: 60px; border-radius: 50%;
     display: grid; place-items: center;
-    font-family: var(--font-display); font-style: italic; font-size: 1.5rem;
+    font-family: var(--font-display); font-weight: 900; font-size: 1.3rem;
     color: var(--ink); background: var(--surface-2); border: 1px solid var(--line-strong);
   }
   .monogram-accent {

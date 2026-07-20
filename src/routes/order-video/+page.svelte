@@ -27,11 +27,13 @@
 <section id="video" class="ord-anchor">
   <div class="container narrow">
     <div class="section-head">
-      <span class="kicker">Video &middot; from &euro;49</span>
-      <h2 style="margin-top:.8rem">Order a product video</h2>
-      <p>Standard product videos have a fixed per-video price. Planning a bigger, multi-shot campaign? That's quoted per project — start it on WhatsApp.</p>
+      <h2>Order a product video</h2>
+      <p>Standard videos are a fixed price from &euro;49. Bigger campaign? Quoted per project on WhatsApp.</p>
     </div>
     <div class="card reveal pending" use:reveal style="padding:clamp(1.4rem,3vw,2.4rem)">
+      <div class="vid-photo">
+        <img src="/img/banners-03.webp" alt="Example VISUAILS product video still" loading="lazy" />
+      </div>
       <form action="/thank-you" method="get">
         <div class="field">
           <label>Video type <span class="req">*</span></label>
@@ -95,6 +97,8 @@
   /* Order-form controls — page-scoped (see order-catalog/+page.svelte for
      the same block; duplicated per-route rather than added to app.css). */
   .narrow { max-width: 820px; }
+  .vid-photo { border-radius: var(--r-media); overflow: hidden; max-height: 200px; margin-bottom: 1.4rem; }
+  .vid-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .field { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1.1rem; }
   .field label { font-size: 0.88rem; font-weight: 600; color: var(--ink); }
   .req { color: var(--accent-bright); }

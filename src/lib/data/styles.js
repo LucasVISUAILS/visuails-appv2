@@ -22,7 +22,7 @@ export const styles = [
     cardDesc: 'Warm, sun-washed editorial scenes with soft natural light and earthy, sand-toned surroundings — an elevated, aspirational feel that flatters premium products.',
     moodTitle: 'What Dunes feels like.',
     moodParagraphs: [
-      'Dunes is stillness: sun-washed minimalism, earthy tones, long soft shadows over warm surfaces. The visual language of quiet luxury — nothing shouts, everything costs more than it says.',
+      'Sun-washed minimalism, earthy tones, long soft shadows. The look of quiet luxury.',
       'It gives products room to feel inevitable. Desert light, linen textures, negative space doing the talking.',
     ],
     steps: [
@@ -58,7 +58,7 @@ export const styles = [
     cardDesc: 'High-energy flash-lit visuals with a nightlife / editorial feel — punchy, contrasty, trend-driven.',
     moodTitle: 'What Flash feels like.',
     moodParagraphs: [
-      "Flash is the nightlife look: hard on-camera light, deep shadows, colour that punches. It's confrontational by design — the aesthetic of paparazzi frames, afterparties and brands that would rather be talked about than scrolled past.",
+      'Hard on-camera light, deep shadows, colour that punches. The nightlife look, confrontational by design.',
       "Done wrong it's just harsh. Done right it's electric. We've made it a discipline.",
     ],
     steps: [
@@ -94,7 +94,7 @@ export const styles = [
     cardDesc: 'Bold visuals inspired by fashion editorial — direct on-camera flash, sharp contrast, strong shadows, modern campaign aesthetic.',
     moodTitle: 'What Glow feels like.',
     moodParagraphs: [
-      "Glow is warmth with intent: low sun, soft bloom, skin and product wrapped in the same amber light. It's the look of an evening that went well — aspirational without being cold about it.",
+      'Low sun, soft bloom, skin and product wrapped in the same amber light. The look of an evening that went well.',
       'Editorial brands use this light because it flatters everything it touches. Now it\'s a setting, not a two-week location shoot.',
     ],
     steps: [
@@ -130,7 +130,7 @@ export const styles = [
     cardDesc: 'Minimal visuals that resemble authentic real-life photography — natural, effortless, like casual smartphone photography.',
     moodTitle: 'What Phone-made feels like.',
     moodParagraphs: [
-      "Phone-made is the art of looking casual: daylight through a window, a product on a kitchen counter, the slightly imperfect frame of a photo a friend took. It reads as real — because everything fake about it has been removed on purpose.",
+      'Daylight through a window, a product on a kitchen counter, a slightly imperfect frame. It reads as real.',
       "It's the style that makes feeds trust you. No studio gloss, no hard sell. Just your product living a believable life.",
     ],
     steps: [

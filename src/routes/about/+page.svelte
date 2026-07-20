@@ -1,8 +1,16 @@
 <script>
-  // VISUAILS — About page. Ported from /tmp/visuails-web/about.html.
-  // Header/footer/nav live in +layout.svelte; this file is page content only.
+  // VISUAILS — About page, v2 redesign. Photo-led, minimal copy, no smooth
+  // scroll, no kicker. See DESIGN.md "Homepage principle" — applied here too.
   import { reveal } from '$lib/actions/reveal.js';
-  import ProductScene from '$lib/components/site/ProductScene.svelte';
+  import { splitText } from '$lib/actions/splitText.js';
+
+  const strip = [
+    '/img/lifestyle-glow-05.webp',
+    '/img/lifestyle-flash-06.webp',
+    '/img/lifestyle-dunes-02.webp',
+    '/img/lifestyle-phone-made-09.webp',
+    '/img/banners-08.webp'
+  ];
 </script>
 
 <svelte:head>
@@ -10,12 +18,13 @@
   <meta name="description" content="VISUAILS is a product-visual studio that combines modern production speed with human judgement, so any brand can get studio-quality product visuals in about a day. Based in Enschede, Netherlands." />
 </svelte:head>
 
-<!-- HERO -->
-<section class="page-hero">
-  <div class="container">
-    <span class="eyebrow-page">About VISUAILS</span>
-    <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem)">Great product visuals, without the studio</h1>
-    <p class="lead" style="margin-top:1.2rem">VISUAILS started with a simple frustration: professional product photos are slow, expensive, and hard to keep consistent. We combine the speed of modern production with the judgement of real people, so any brand can get studio-quality visuals in about a day.</p>
+<!-- HERO — full-bleed real photo, one line. -->
+<section class="hero-editorial">
+  <div class="bg" style="background-image:url('/img/banners-07.webp')"></div>
+  <div class="fade"></div>
+  <div class="hero-editorial-content container">
+    <h1 class="display" use:splitText>Great visuals,<br />without the <em>studio</em>.</h1>
+    <p class="lead" style="margin-top:1.2rem">Studio-quality product visuals in about a day — modern speed, checked by real people.</p>
     <div class="flex" style="margin-top:1.8rem">
       <a href="/test-sample" class="btn btn-primary btn-lg">Free test sample</a>
       <a href="https://wa.me/31625436130?text=Hi%20VISUAILS%2C%20I%27d%20like%20to%20learn%20more%20about%20you." class="btn btn-wa" target="_blank" rel="noopener">
@@ -26,63 +35,56 @@
   </div>
 </section>
 
-<!-- WHAT WE BELIEVE -->
+<!-- HOW WE WORK -->
 <section class="section-tight">
   <div class="container">
-    <div class="section-head">
-      <span class="kicker">What we believe</span>
-      <h2 style="margin-top:0.8rem">Three principles behind every visual</h2>
+    <div class="photo-split reveal pending" use:reveal>
+      <div class="photo-split-media">
+        <img src="/img/custom-models-01.webp" alt="A VISUAILS campaign scene, styled and shot for a client brand" loading="lazy" />
+      </div>
+      <div>
+        <h2>Speed and judgement, <em>together</em>.</h2>
+        <p class="lead" style="margin-top:1rem">A small team in Enschede, Netherlands. One photo becomes a full set in about a day — and a real person reviews every image before it reaches you.</p>
+        <div class="chip-row" style="margin-top:1.4rem">
+          <span class="chip"><span class="dot"></span>Enschede, NL</span>
+          <span class="chip"><span class="dot"></span>100% human-reviewed</span>
+          <span class="chip"><span class="dot"></span>~24h delivery</span>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- THREE PRINCIPLES -->
+<section class="section-tight">
+  <div class="container">
+    <h2 style="margin-bottom:2rem">Three things we hold to.</h2>
     <div class="grid grid-3">
       <div class="card card-hover reveal pending" use:reveal>
-        <h3>Speed shouldn't cost quality</h3>
-        <p style="margin-top:.6rem">Fast delivery only matters if the result is worth publishing. We built our process so a quick turnaround and a careful, human-checked finish come together — not one at the expense of the other.</p>
+        <h3>Speed, without the shortcut</h3>
+        <p style="margin-top:.6rem;color:var(--ink-3)">Fast delivery, and still worth publishing.</p>
       </div>
       <div class="card card-hover reveal pending" use:reveal>
         <h3>Consistency wins</h3>
-        <p style="margin-top:.6rem">Shoppers trust a shop that looks like it has its act together. We keep lighting, framing and style steady across your whole range, so your catalogue reads as one coherent brand.</p>
+        <p style="margin-top:.6rem;color:var(--ink-3)">One coherent look, across your whole range.</p>
       </div>
       <div class="card card-hover reveal pending" use:reveal>
-        <h3>Accessible to everyone</h3>
-        <p style="margin-top:.6rem">Great visuals shouldn't be reserved for brands with big budgets. Starting at €19 per visual and with no subscription, a small shop can look as polished as a household name.</p>
+        <h3>Open to everyone</h3>
+        <p style="margin-top:.6rem;color:var(--ink-3)">From €19 per visual. No subscription.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW WE WORK -->
-<section>
-  <div class="container two-col">
-    <div class="reveal pending" use:reveal>
-      <span class="kicker" style="color:var(--accent-bright)">How we work</span>
-      <h2 style="margin-top:1rem">A product-visual studio for modern e-commerce brands.</h2>
-      <p class="lead" style="margin-top:1.2rem">We're a small, focused team based in Enschede, Netherlands. Our studio produces your set quickly, and a real person selects and reviews every image before it reaches you — checking accuracy, consistency and detail.</p>
-      <p style="margin-top:1rem;color:var(--ink-3);max-width:66ch">That balance is the whole idea. That's how one photo becomes a full set of visuals in about a day. People give us the taste and judgement to make sure each one actually looks like your brand made it. Neither works as well alone.</p>
-      <div class="chip-row" style="margin-top:1.6rem">
-        <span class="chip"><span class="dot"></span>Based in Enschede, NL</span>
-        <span class="chip"><span class="dot"></span>100% human-reviewed</span>
-        <span class="chip"><span class="dot"></span>~24h typical delivery</span>
-      </div>
-    </div>
-    <div class="reveal pending" use:reveal>
-      <ProductScene icon="bottle" width="42%" badge="Studio speed &middot; Human control" wide />
-    </div>
-  </div>
-</section>
-
-<!-- VISUAL GALLERY -->
+<!-- STRIP — real photography, no copy. -->
 <section class="section-tight">
   <div class="container">
-    <div class="grid grid-3">
-      <div class="reveal pending" use:reveal>
-        <ProductScene photo="/img/lifestyle-glow-03.webp" icon="jar" width="46%" badge="Lifestyle &middot; Glow" />
-      </div>
-      <div class="reveal pending" use:reveal>
-        <ProductScene icon="sneaker" width="56%" badge="Catalog &middot; Classic" />
-      </div>
-      <div class="reveal pending" use:reveal>
-        <ProductScene icon="bag" width="46%" badge="Catalog &middot; Custom" />
-      </div>
+    <div class="photo-grid reveal pending" use:reveal>
+      <img src={strip[0]} alt="Glow-style lifestyle visual" loading="lazy" class="wide" />
+      <img src={strip[1]} alt="Flash-style lifestyle visual" loading="lazy" />
+      <img src={strip[2]} alt="Dunes-style lifestyle visual" loading="lazy" />
+      <img src={strip[3]} alt="Phone-made-style lifestyle visual" loading="lazy" />
+      <img src={strip[4]} alt="Campaign photography" loading="lazy" class="wide" />
     </div>
   </div>
 </section>
@@ -91,10 +93,10 @@
 <section>
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
-      <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Let's grow together</h2>
-      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Try a free test sample to see the quality for yourself, or message us on WhatsApp — we usually reply within the hour.</p>
+      <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Let's grow <em>together</em>.</h2>
+      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Free test sample, or message us on WhatsApp.</p>
       <div class="flex" style="justify-content:center;margin-top:2rem">
-        <a href="/test-sample" class="btn btn-primary btn-lg">Free test sample &mdash; no card needed</a>
+        <a href="/test-sample" class="btn btn-primary btn-lg">Free test sample</a>
         <a href="https://wa.me/31625436130?text=Hi%20VISUAILS%2C%20I%27d%20like%20to%20talk%20about%20visuals%20for%20my%20brand." class="btn btn-wa" target="_blank" rel="noopener">
           <svg class="i" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 20l1.5-4.5A8.38 8.38 0 0 1 3.5 11 8.5 8.5 0 0 1 12 3a8.38 8.38 0 0 1 8.5 8.5z"/></svg>
           WhatsApp

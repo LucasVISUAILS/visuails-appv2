@@ -18,28 +18,28 @@
   const plans = [
     {
       name: 'Catalog', price: '€19', unit: 'from / visual', accent: false,
-      desc: 'Clean, consistent product shots on a controlled background.',
-      features: ['Consistent lighting, angle & background', 'Marketplace & webshop ready', 'Human review + 3 revision rounds'],
+      desc: 'Clean product shots on a controlled background.',
+      features: ['Consistent lighting & background', 'Marketplace & webshop ready', '3 revision rounds'],
       cta: 'Order catalog',
     },
     {
       name: 'Lifestyle', price: '€35', unit: 'from / visual', accent: true,
-      desc: 'Your product in styled, real-world scenes — models optional.',
-      features: ['Styled scenes with natural light', 'Standard models included', 'Human review + 3 revision rounds'],
+      desc: 'Your product in styled, real-world scenes.',
+      features: ['Natural light, styled scenes', 'Standard models included', '3 revision rounds'],
       cta: 'Order lifestyle',
     },
     {
       name: 'Video', price: '€49', unit: '/ video', accent: false,
-      desc: 'Standard product videos with subtle motion for pages, feeds and ads.',
-      features: ['Motion Video from €49, Lifestyle Video from €59', 'Bigger campaign videos quoted per project', 'Human review before delivery'],
+      desc: 'Product videos with subtle motion for feeds and ads.',
+      features: ['Motion from €49, Lifestyle from €59', 'Campaign videos quoted per project', 'Human review before delivery'],
       cta: 'Order a video',
     },
   ];
 
   const addons = [
-    { name: 'Multi Format Export', desc: 'Delivered in 1:1, 4:5, 9:16 and 16:9 — ready for every placement.', price: '+€19.99' },
-    { name: '4K Export', desc: 'Higher-resolution files instead of the standard 2K — about €2/visual when ordering 5.', price: '+€9.99' },
-    { name: 'Priority delivery', desc: 'Jump to the top of the queue for the fastest possible turnaround.', price: '+€29.99' },
+    { name: 'Multi Format Export', desc: 'Delivered in 1:1, 4:5, 9:16 and 16:9.', price: '+€19.99' },
+    { name: '4K Export', desc: 'Higher resolution instead of the standard 2K.', price: '+€9.99' },
+    { name: 'Priority delivery', desc: 'Jump to the top of the queue.', price: '+€29.99' },
   ];
 
   const tiers = [
@@ -51,10 +51,10 @@
   const included = ['Human review on every visual', '2K export', '~24h delivery', '3 revision rounds'];
 
   const faqs = [
-    { q: 'What payment methods do you accept?', a: 'We currently invoice you directly for your order. iDEAL and other instant payment options are coming soon. If you have a preference, just let us know when you order.' },
-    { q: 'How does VAT and reverse-charge work?', a: "We're based in the Netherlands (VAT NL005407575B96). For EU businesses with a valid VAT number, reverse-charge may apply — add your VAT number at checkout and we'll handle the invoice accordingly. Providing it also speeds up invoicing." },
-    { q: 'What counts as one "visual"?', a: 'A visual is one finished image delivered to you. Multi Format Export delivers that same visual in several aspect ratios (1:1, 4:5, 9:16, 16:9) — it still counts as one visual, not four.' },
-    { q: 'How does custom pricing work?', a: 'A custom style or custom model is a one-time design fee, after which you pay the normal per-visual price on every order. Video is quoted per project. For all of these we run a short WhatsApp intake to scope your brief and confirm the price before any work starts.' },
+    { q: 'What payment methods do you accept?', a: 'We invoice you directly. iDEAL and other instant options are coming soon — let us know your preference when you order.' },
+    { q: 'How does VAT and reverse-charge work?', a: "We're based in the Netherlands (VAT NL005407575B96). EU businesses with a valid VAT number can add it at checkout for reverse-charge and faster invoicing." },
+    { q: 'What counts as one "visual"?', a: 'One finished image. Multi Format Export delivers it in several aspect ratios — still one visual, not four.' },
+    { q: 'How does custom pricing work?', a: 'A custom style or model is a one-time design fee, then the normal per-visual price on every order after. Video is quoted per project, scoped over a short WhatsApp intake.' },
   ];
 </script>
 
@@ -80,7 +80,7 @@
   <div class="container">
     <div class="section-head">
       <h2>Pay per visual</h2>
-      <p>Pick the service you need. Prices are per visual — order five or five hundred at the same short wait.</p>
+      <p>No subscriptions. Order five or five hundred at the same short wait.</p>
     </div>
     <div class="grid grid-3">
       {#each plans as p}
@@ -97,7 +97,7 @@
         </div>
       {/each}
     </div>
-    <p class="pill-note" style="margin-top:1.8rem">A custom style or custom model is a one-time design fee, then the normal visual price on every order. We set it up together over a short WhatsApp intake.</p>
+    <p class="pill-note" style="margin-top:1.8rem">A custom style or model is a one-time design fee, then the normal visual price.</p>
   </div>
 </section>
 
@@ -105,8 +105,7 @@
 <section class="section-tight">
   <div class="container narrow">
     <div class="section-head">
-      <h2>Add-ons &amp; options</h2>
-      <p>Optional extras you can add to any order.</p>
+      <h2>Add-ons</h2>
     </div>
     <div class="addon-list reveal pending" use:reveal>
       {#each addons as a}
@@ -127,7 +126,6 @@
   <div class="container narrow">
     <div class="section-head">
       <h2>Volume</h2>
-      <p>Order in any quantity — larger runs qualify for a volume discount.</p>
     </div>
     <div class="tier-row reveal pending" use:reveal>
       {#each tiers as t}
@@ -137,7 +135,7 @@
         </div>
       {/each}
     </div>
-    <p class="pill-note" style="margin-top:1.4rem">Planning a larger run? <a href="https://wa.me/31625436130?text=Hi%20VISUAILS%2C%20I%27d%20like%20a%20volume%20quote." class="link-arrow" style="font-size:1rem" target="_blank" rel="noopener">Contact us for a volume quote <svg viewBox="0 0 24 24" class="i"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+    <p class="pill-note" style="margin-top:1.4rem"><a href="https://wa.me/31625436130?text=Hi%20VISUAILS%2C%20I%27d%20like%20a%20volume%20quote." class="link-arrow" style="font-size:1rem" target="_blank" rel="noopener">Contact us for a volume quote <svg viewBox="0 0 24 24" class="i"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
   </div>
 </section>
 
@@ -147,7 +145,6 @@
     <div class="card reveal pending" use:reveal style="padding:clamp(1.6rem,3vw,2.6rem)">
       <div class="section-head" style="margin-bottom:1.4rem">
         <h2>Always included</h2>
-        <p>Every order comes with these as standard — no extra charge.</p>
       </div>
       <div class="grid included-grid">
         {#each included as item}
@@ -164,9 +161,8 @@
     <div class="card reveal pending" use:reveal style="border-color:var(--accent-line)">
       <div class="two-col" style="align-items:center">
         <div>
-          <span class="kicker" style="color:var(--accent-bright)">Try before you order</span>
-          <h2 style="margin-top:1rem">Free test sample</h2>
-          <p class="measure" style="margin-top:1rem">See your own product transformed before you commit. One free test sample per business — a small €0.99 verification confirms you're a real business, and it's the only thing you pay.</p>
+          <h2>Free test sample</h2>
+          <p class="measure" style="margin-top:1rem">See your own product transformed before you commit. One free sample per business — a €0.99 verification is the only thing you pay.</p>
           <div class="flex" style="margin-top:1.6rem">
             <a href="/test-sample" class="btn btn-primary">Request your free test sample</a>
           </div>
@@ -185,7 +181,6 @@
   <div class="container narrow">
     <div class="section-head">
       <h2>Pricing FAQ</h2>
-      <p>The common questions about how paying for VISUAILS works.</p>
     </div>
     <div class="acc reveal pending" use:reveal>
       {#each faqs as f}
@@ -203,7 +198,6 @@
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Transparent pricing.<br />No <em>surprises.</em></h2>
-      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Start with a free test sample, or place your first order today. No subscription, no hidden fees — just pay per visual.</p>
       <div class="flex" style="justify-content:center;margin-top:2rem">
         <a href="/test-sample" class="btn btn-primary btn-lg">Free test sample — no card needed</a>
         <a href="/order" class="btn btn-ghost btn-lg">Order now</a>

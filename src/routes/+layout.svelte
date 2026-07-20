@@ -1,13 +1,14 @@
 <script>
   // VISUAILS — root layout: header, nav, mobile nav, footer, grain overlay,
-  // conversion bar, and the smooth-scroll wrapper.
-  // Svelte 5 runes syntax.
+  // conversion bar. Svelte 5 runes syntax.
   //
-  // UPDATED: added the SVG icon sprite (#p-bottle / #p-sneaker / #p-jar /
-  // #p-bag) used by ProductScene.svelte on every page with placeholder
-  // product scenes — defined once here so every route can reference it.
+  // v2 redesign: smooth-scroll removed entirely (explicit user request) —
+  // native browser scroll now, no #scroll-content/#scroll-spacer wrapper.
+  //
+  // The SVG icon sprite (#p-bottle / #p-sneaker / #p-jar / #p-bag) is used
+  // by ProductScene.svelte on every page with placeholder product scenes —
+  // defined once here so every route can reference it.
   import '../app.css';
-  import { smoothScroll } from '$lib/actions/smoothScroll.js';
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
 
@@ -126,56 +127,53 @@
   <div style="margin-top:1.5rem"><a href="/order" class="btn btn-primary btn-block">Order now</a></div>
 </div>
 
-<div id="scroll-spacer"></div>
-<div id="scroll-content" use:smoothScroll={{ ease: 0.26 }}>
-  <main>
-    {@render children()}
-  </main>
+<main>
+  {@render children()}
+</main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="/" class="brand"><span class="brand-word">VIS<span class="u">U</span>AILS</span></a>
-          <p>A product-visual studio for modern e-commerce brands — for founders who would rather grow than book another shoot.</p>
-        </div>
-        <div class="footer-col">
-          <h5>Services</h5>
-          <ul>
-            {#each services as s}<li><a href={s.href}>{s.title}</a></li>{/each}
-            <li><a href="/gallery">Gallery</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5>Company</h5>
-          <ul>
-            <li><a href="/about">About</a></li>
-            <li><a href="/pricing">Pricing</a></li>
-            <li><a href="/how-it-works">How it works</a></li>
-            <li><a href="/faq">FAQ</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5>Get in touch</h5>
-          <ul>
-            <li><a href="mailto:hello@visuails.com">hello@visuails.com</a></li>
-            <li><a href="https://wa.me/31625436130" target="_blank" rel="noopener">+31 6 25436130</a></li>
-            <li style="color:var(--ink-3)">Enschede, Netherlands</li>
-          </ul>
-        </div>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="brand"><span class="brand-word">VIS<span class="u">U</span>AILS</span></a>
+        <p>A product-visual studio for modern e-commerce brands — for founders who would rather grow than book another shoot.</p>
       </div>
-      <div class="footer-bottom">
-        <span>&copy; {year} VISUAILS &middot; KVK 99742993 &middot; VAT NL005407575B96</span>
-        <span style="display:flex;gap:1.2rem;flex-wrap:wrap">
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms of Service</a>
-          <a href="/cookie-policy">Cookies</a>
-        </span>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          {#each services as s}<li><a href={s.href}>{s.title}</a></li>{/each}
+          <li><a href="/gallery">Gallery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/how-it-works">How it works</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Get in touch</h5>
+        <ul>
+          <li><a href="mailto:hello@visuails.com">hello@visuails.com</a></li>
+          <li><a href="https://wa.me/31625436130" target="_blank" rel="noopener">+31 6 25436130</a></li>
+          <li style="color:var(--ink-3)">Enschede, Netherlands</li>
+        </ul>
       </div>
     </div>
-  </footer>
-</div>
+    <div class="footer-bottom">
+      <span>&copy; {year} VISUAILS &middot; KVK 99742993 &middot; VAT NL005407575B96</span>
+      <span style="display:flex;gap:1.2rem;flex-wrap:wrap">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/cookie-policy">Cookies</a>
+      </span>
+    </div>
+  </div>
+</footer>
 
 {#if convbarShown && !convbarDismissed}
   <div class="convbar show" role="complementary" aria-label="Quick start">

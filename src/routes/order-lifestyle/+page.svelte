@@ -17,7 +17,6 @@
   // replace with a real form endpoint (Formspree, a Cloudflare Pages
   // Function, etc.) before launch.
   import { reveal } from '$lib/actions/reveal.js';
-  import ProductScene from '$lib/components/site/ProductScene.svelte';
 
   const roster = ['Aaron', 'Ava', 'Lila', 'Sam', 'Morgan', 'Dasha', 'Elias', 'Ryan', 'Rose'];
 
@@ -48,13 +47,12 @@
 <section id="lifestyle" class="ord-anchor section-tight">
   <div class="container narrow">
     <div class="section-head">
-      <span class="kicker">Lifestyle</span>
-      <h2 style="margin-top:.8rem">Order lifestyle visuals</h2>
+      <h2>Order lifestyle visuals</h2>
       <p>Styled, real-world scenes with optional consistent models — checkout in three quick steps.</p>
     </div>
     <div class="card reveal pending" use:reveal style="padding:clamp(1.4rem,3vw,2.4rem)">
-      <div style="margin-bottom:1.4rem;max-height:180px;overflow:hidden;border-radius:var(--r-media)">
-        <ProductScene icon="jar" width="40%" badge="Lifestyle &middot; Glow" wide />
+      <div class="ls-photo">
+        <img src="/img/lifestyle-glow-05.webp" alt="Example lifestyle visual, Glow style" loading="lazy" />
       </div>
       <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.6rem;margin-bottom:.9rem">
         <h3 style="margin:0">Place your order</h3>
@@ -228,6 +226,8 @@
   /* Order-form controls — page-scoped (see order-catalog/+page.svelte for
      the same block; duplicated per-route rather than added to app.css). */
   .narrow { max-width: 820px; }
+  .ls-photo { border-radius: var(--r-media); overflow: hidden; max-height: 200px; margin-bottom: 1.4rem; }
+  .ls-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .hidden-step { display: none; }
   .field { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1.1rem; }
   .field label { font-size: 0.88rem; font-weight: 600; color: var(--ink); }
@@ -247,7 +247,7 @@
   .choice:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
   .choice:has(input:checked)::after { content: "\2713"; position: absolute; top: 8px; right: 8px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 0.8rem; font-weight: 700; }
   .mono { display: grid; place-items: center; background: radial-gradient(125% 90% at 50% 6%, #FFFFFF, #F1EBE3 58%, #E2D9CD 100%); }
-  .mono .mono-av { position: relative; display: grid; place-items: center; width: 100%; height: 100%; font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 1.4rem; color: var(--accent-bright); }
+  .mono .mono-av { position: relative; display: grid; place-items: center; width: 100%; height: 100%; font-family: var(--font-display); font-weight: 900; font-size: 1.4rem; color: var(--accent-bright); }
   .mono .mono-av small { position: absolute; bottom: 8px; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); font-family: var(--font-body); font-style: normal; }
   .opt { display: flex; align-items: center; gap: 0.8rem; padding: 0.9rem 1.1rem; border-radius: var(--r-sm); border: 1px solid var(--line-strong); cursor: pointer; transition: border-color 0.2s var(--ease), background 0.2s var(--ease); margin-bottom: 0.6rem; background: var(--surface); }
   .opt:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }

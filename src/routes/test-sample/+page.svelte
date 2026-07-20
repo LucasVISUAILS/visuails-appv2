@@ -15,7 +15,6 @@
   // real form endpoint (Formspree, a Cloudflare Pages Function, etc.)
   // before launch.
   import { reveal } from '$lib/actions/reveal.js';
-  import ProductScene from '$lib/components/site/ProductScene.svelte';
 
   const styles = [
     { value: 'Phone-made', icon: 'bottle', vb: '0 0 120 150', w: '42%' },
@@ -37,7 +36,7 @@
 <section class="page-hero"><div class="container">
   <span class="eyebrow-page">Free test sample</span>
   <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem)">Test VISUAILS with <span class="accent-word">1 product</span></h1>
-  <p class="lead" style="margin-top:1.2rem">Upload one product photo and let us turn it into a professional e-commerce visual. Perfect if you want to see how VISUAILS works before ordering.</p>
+  <p class="lead" style="margin-top:1.2rem">Upload one product photo and see it become a publish-ready visual — before you order.</p>
   <div class="chip-row" style="margin-top:1.8rem">
     <span class="chip"><span class="dot"></span>1 sample per business</span>
     <span class="chip"><span class="dot"></span>&euro;0.99 verification</span>
@@ -49,9 +48,8 @@
 <section class="section-tight">
   <div class="container two-col">
     <div class="reveal pending" use:reveal>
-      <span class="kicker">What you get</span>
-      <h2 style="margin-top:1rem">One product, turned into a publish-ready visual.</h2>
-      <p style="margin-top:1.1rem;color:var(--ink-3);max-width:52ch">We take your single product photo and create one clean, professional e-commerce visual — the same pipeline and human review used on every paid order. It's the honest way to judge the quality before you commit to anything.</p>
+      <h2>One product, turned into a publish-ready visual.</h2>
+      <p style="margin-top:1.1rem;color:var(--ink-3);max-width:52ch">The same pipeline and human review used on every paid order — the honest way to judge quality before you commit.</p>
       <ul class="checklist" style="margin-top:1.4rem">
         <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5" /></svg><span>One high-resolution visual, delivered by email download link.</span></li>
         <li><svg viewBox="0 0 24 24" class="i" style="stroke:var(--success)"><path d="M20 6L9 17l-5-5" /></svg><span>A real look at our lighting, framing and finish.</span></li>
@@ -60,7 +58,11 @@
       </ul>
     </div>
     <div class="reveal pending" use:reveal>
-      <ProductScene icon="bottle" width="42%" badge="Your sample &middot; Human-checked" wide />
+      <div class="photo-band">
+        <img src="/img/lifestyle-glow-03.webp" alt="Example VISUAILS visual, Glow style" loading="lazy" />
+        <div class="scrim"></div>
+        <div class="caption"><p style="margin:0">Your sample, human-checked</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -231,7 +233,7 @@
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Rather just talk it through?</h2>
-      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Send us your product on WhatsApp and we'll help you pick a style. We usually reply within the hour.</p>
+      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Send us your product on WhatsApp and we'll help you pick a style.</p>
       <div class="flex" style="justify-content:center;margin-top:2rem">
         <a href="/order" class="btn btn-ghost btn-lg">Place a full order</a>
         <a href="https://wa.me/31625436130?text=Hi%20VISUAILS%2C%20I%27d%20like%20to%20try%20a%20free%20test%20sample." class="btn btn-wa btn-lg" target="_blank" rel="noopener">
@@ -266,7 +268,7 @@
   .choice .choice-label { padding: 0.6rem 0.7rem; font-size: 0.85rem; color: var(--ink); font-weight: 500; }
   .choice:has(input:checked) { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
   .choice:has(input:checked)::after { content: "\2713"; position: absolute; top: 8px; right: 8px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 0.8rem; font-weight: 700; z-index: 5; }
-  .choice .mono-av { position: relative; z-index: 2; display: grid; place-items: center; width: 100%; height: 100%; font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 1.4rem; color: var(--accent-bright); }
+  .choice .mono-av { position: relative; z-index: 2; display: grid; place-items: center; width: 100%; height: 100%; font-family: var(--font-display); font-weight: 900; font-size: 1.4rem; color: var(--accent-bright); }
   .choice .mono-av small { position: absolute; bottom: 8px; font-size: 0.58rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); font-family: var(--font-body); font-style: normal; }
   .dropzone { display: block; border-radius: var(--r-sm); padding: 1.8rem; text-align: center; color: var(--ink-3); border: 1.5px dashed var(--line-strong); transition: border-color 0.22s var(--ease), background 0.22s var(--ease); cursor: pointer; background: var(--surface); }
   .dropzone:hover { border-color: var(--accent-line); background: var(--accent-soft); }

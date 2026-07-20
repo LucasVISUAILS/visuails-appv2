@@ -33,11 +33,13 @@
 <section id="custom" class="ord-anchor section-tight">
   <div class="container narrow">
     <div class="section-head">
-      <span class="kicker">Custom styling</span>
-      <h2 style="margin-top:.8rem">Something more custom?</h2>
-      <p>Custom styling is arranged entirely over WhatsApp — we then look at style and budget together.</p>
+      <h2>Something more custom?</h2>
+      <p>Arranged entirely over WhatsApp — we look at style and budget together.</p>
     </div>
     <div class="card reveal pending" use:reveal style="padding:clamp(1.4rem,3vw,2.4rem)">
+      <div class="custom-photo">
+        <img src="/img/custom-models-01.webp" alt="A VISUAILS custom-styled model" loading="lazy" />
+      </div>
       <form onsubmit={(e) => e.preventDefault()}>
         <div class="row-2">
           <div class="field">
@@ -67,8 +69,7 @@
           <label for="cu-wa">WhatsApp number <span class="req">*</span></label>
           <input class="input" type="tel" id="cu-wa" name="whatsapp" autocomplete="tel" placeholder="+31 6 &hellip;" required />
         </div>
-        <p class="hint" style="margin-bottom:1.2rem">Custom styling is arranged entirely over WhatsApp — we then look at style and budget together.</p>
-        <a href={waHref} class="btn btn-wa btn-lg btn-block" target="_blank" rel="noopener">
+        <a href={waHref} class="btn btn-wa btn-lg btn-block" style="margin-top:1.2rem" target="_blank" rel="noopener">
           <svg class="i" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 20l1.5-4.5A8.38 8.38 0 0 1 3.5 11 8.5 8.5 0 0 1 12 3a8.38 8.38 0 0 1 8.5 8.5z" /></svg>
           Continue on WhatsApp
         </a>
@@ -94,6 +95,8 @@
   /* Order-form controls — page-scoped (see order-catalog/+page.svelte for
      the same block; duplicated per-route rather than added to app.css). */
   .narrow { max-width: 820px; }
+  .custom-photo { border-radius: var(--r-media); overflow: hidden; max-height: 220px; margin-bottom: 1.4rem; }
+  .custom-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .field { display: flex; flex-direction: column; gap: 0.45rem; margin-bottom: 1.1rem; }
   .field label { font-size: 0.88rem; font-weight: 600; color: var(--ink); }
   .req { color: var(--accent-bright); }

@@ -1,16 +1,15 @@
 <script>
-  // VISUAILS — How it works page. Ported from /tmp/visuails-web/how-it-works.html.
-  // Header/footer/nav live in +layout.svelte; this file is page content only.
+  // VISUAILS — How it works page, v2 redesign. Photo-led, minimal copy, no
+  // smooth scroll, no kicker. See DESIGN.md "Homepage principle".
   import { reveal } from '$lib/actions/reveal.js';
   import { compare } from '$lib/actions/compare.js';
-  import ProductScene from '$lib/components/site/ProductScene.svelte';
 
   const details = [
-    { title: 'Turnaround', body: "Around 24 hours from brief to download for standard orders. Busy periods or a brand-new custom style can take a little longer — we'll always tell you." },
-    { title: 'Revisions', body: "Three revision rounds are included as standard. Your feedback shapes the final result — we'd rather get it right than get it fast." },
-    { title: 'Consistency', body: 'Order after order, we hold the same lighting, angle and framing — so your catalogue looks like one considered set, not a patchwork.' },
-    { title: 'Two ways to order', body: 'Use the on-site forms, or order over WhatsApp — whichever suits you. For custom styles and models, WhatsApp is the way we work through the details together.' },
-    { title: 'Formats & resolution', body: 'High-resolution files, e-commerce ready. 2K export is included; 4K and multi-format exports are available as options.' },
+    { title: 'Turnaround', body: 'About 24 hours from brief to download for standard orders.' },
+    { title: 'Revisions', body: 'Three rounds included, so we get it right.' },
+    { title: 'Consistency', body: 'Same lighting, angle and framing, order after order.' },
+    { title: 'Two ways to order', body: 'On-site forms, or WhatsApp — whichever suits you.' },
+    { title: 'Formats & resolution', body: 'High-resolution, e-commerce-ready files. 2K included, 4K optional.' },
   ];
 </script>
 
@@ -19,12 +18,13 @@
   <meta name="description" content="From one product photo to publish-ready catalog, lifestyle and video visuals — generated, human-reviewed and delivered in about 24 hours." />
 </svelte:head>
 
-<!-- HERO -->
-<section class="page-hero">
-  <div class="container">
-    <span class="eyebrow-page">How it works</span>
-    <h1 class="display" style="font-size:clamp(2.2rem,4.8vw,3.8rem)">From one photo to publish-ready visuals</h1>
-    <p class="lead" style="margin-top:1.1rem">The whole point of VISUAILS is that it feels effortless on your side. You send a product photo; we handle generation, selection and a human quality check; you get files that are ready to publish.</p>
+<!-- HERO — full-bleed real photo, one line. -->
+<section class="hero-editorial">
+  <div class="bg" style="background-image:url('/img/banners-04.webp')"></div>
+  <div class="fade"></div>
+  <div class="hero-editorial-content container">
+    <h1 class="display">One photo in.<br />A campaign <em>out</em>.</h1>
+    <p class="lead" style="margin-top:1.2rem">You send a product photo. We handle generation, selection and a human check. You get files ready to publish.</p>
     <div class="flex" style="margin-top:1.8rem">
       <a href="/order" class="btn btn-primary btn-lg">Start an order</a>
       <a href="/test-sample" class="btn btn-ghost btn-lg">Try a free sample</a>
@@ -33,23 +33,23 @@
 </section>
 
 <!-- STEPS -->
-<section>
+<section class="section-tight">
   <div class="container">
     <div class="steps">
       <div class="step reveal pending" use:reveal>
         <div class="step-n">01</div>
         <h3>Upload &amp; brief</h3>
-        <p>Share a product photo or screenshot and a short note on the look you're after — style, background, and any must-haves. It takes about five minutes. Not sure what to send? Our <a href="/upload-guidelines">upload guidelines</a> cover it.</p>
+        <p>A product photo and a short note on the look you want. Five minutes, start to finish. See our <a href="/upload-guidelines">upload guidelines</a>.</p>
       </div>
       <div class="step reveal pending" use:reveal>
         <div class="step-n">02</div>
         <h3>We produce &amp; review</h3>
-        <p>Our pipeline creates your visuals with consistent lighting, framing and composition. Then a real person checks every single image for accuracy, artefacts and on-brand consistency — nothing ships on autopilot.</p>
+        <p>Consistent lighting and framing, generated in our pipeline — then a real person checks every image before it ships.</p>
       </div>
       <div class="step reveal pending" use:reveal>
         <div class="step-n">03</div>
         <h3>Download &amp; use</h3>
-        <p>You receive high-resolution, e-commerce-ready files by download link — typically within about 24 hours. Something not right? Revisions are included.</p>
+        <p>High-resolution, e-commerce-ready files, typically within about 24 hours. Revisions included.</p>
       </div>
     </div>
   </div>
@@ -62,8 +62,8 @@
       <div class="reveal-clip-wrap" use:reveal={{ variant: 'clip' }}>
         <div class="reveal-clip-inner">
           <div class="ba" use:compare aria-label="Before and after: a raw product photo transformed into a VISUAILS visual">
-            <div class="ba-layer ba-before-scene" aria-hidden="true"><ProductScene icon="bottle" width="44%" /></div>
-            <div class="ba-layer ba-after" aria-hidden="true"><ProductScene icon="bottle" width="44%" /></div>
+            <div class="ba-layer ba-before-scene" aria-hidden="true"><img src="/img/lifestyle-phone-made-07.webp" alt="Plain, candid product photo before VISUAILS" /></div>
+            <div class="ba-layer ba-after" aria-hidden="true"><img src="/img/lifestyle-glow-06.webp" alt="The same product in a styled scene after VISUAILS" /></div>
             <span class="ba-tag tag-before">Before</span><span class="ba-tag tag-after">After</span>
             <div class="ba-handle" aria-hidden="true"></div>
             <div class="ba-knob" aria-hidden="true"><svg class="i" viewBox="0 0 24 24" style="width:18px;height:18px"><path d="M8 7l-4 5 4 5M16 7l4 5-4 5"/></svg></div>
@@ -72,9 +72,8 @@
       </div>
     </div>
     <div class="reveal pending" use:reveal>
-      <span class="kicker" style="color:var(--accent-bright)">What "human-reviewed" really means</span>
-      <h2 style="margin-top:1rem">A person signs off on every visual.</h2>
-      <p class="lead" style="margin-top:1.1rem">AI does the heavy lifting, but it isn't left to decide alone. Before anything reaches you, a person checks that the product is accurate, the lighting and framing are consistent with the rest of your set, and there are no odd artefacts. That's the difference between a raw AI tool and a finished result you can publish.</p>
+      <h2>A person signs off on every visual.</h2>
+      <p class="lead" style="margin-top:1.1rem">AI does the heavy lifting. A person checks accuracy, consistency and framing before anything ships — the difference between a raw AI tool and something you'd publish.</p>
       <div class="chip-row" style="margin-top:1.4rem">
         <span class="chip"><span class="dot"></span>Accuracy check</span>
         <span class="chip"><span class="dot"></span>Consistency across your set</span>
@@ -87,7 +86,7 @@
 <!-- DETAILS -->
 <section>
   <div class="container">
-    <div class="section-head"><h2>The details that matter</h2><p>Everything you'd want to know before your first order.</p></div>
+    <div class="section-head"><h2>The details that matter</h2></div>
     <div class="grid grid-auto">
       {#each details as d}
         <div class="card reveal pending" use:reveal>
@@ -97,7 +96,7 @@
       {/each}
       <div class="card reveal pending" use:reveal>
         <h3 style="font-size:1.05rem">Your rights</h3>
-        <p style="margin-top:.5rem;font-size:.95rem;color:var(--ink-3)">You receive commercial usage rights to your delivered visuals, and you keep the rights to your own product and brand assets. Details in our <a href="/terms">terms</a>.</p>
+        <p style="margin-top:.5rem;font-size:.95rem;color:var(--ink-3)">Full commercial usage rights to everything we deliver. Details in our <a href="/terms">terms</a>.</p>
       </div>
     </div>
   </div>
@@ -106,7 +105,7 @@
 <!-- FAQ TEASER -->
 <section class="section-tight">
   <div class="container">
-    <div style="text-align:center;max-width:60ch;margin:0 auto 1.4rem"><h2>Still have a question?</h2><p style="margin-top:.6rem">Our FAQ covers ordering, delivery, pricing, VAT and usage rights.</p></div>
+    <div style="text-align:center;max-width:60ch;margin:0 auto 1.4rem"><h2>Still have a question?</h2></div>
     <div class="flex" style="justify-content:center"><a href="/faq" class="btn btn-ghost btn-lg">Read the FAQ</a></div>
   </div>
 </section>

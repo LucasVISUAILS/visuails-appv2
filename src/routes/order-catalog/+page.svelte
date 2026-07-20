@@ -29,9 +29,8 @@
 <section id="catalog" class="ord-anchor">
   <div class="container narrow">
     <div class="section-head">
-      <span class="kicker">Catalog &middot; from &euro;19 / visual</span>
-      <h2 style="margin-top:.8rem">Request catalog visuals</h2>
-      <p>Clean, consistent product images on a plain background — built for webshops and marketplaces.</p>
+      <h2>Request catalog visuals</h2>
+      <p>Clean, consistent product images on a plain background. <strong style="color:var(--accent-bright)">From &euro;19 / visual.</strong></p>
     </div>
     <div class="card reveal pending" use:reveal style="padding:clamp(1.4rem,3vw,2.4rem)">
       <form action="/thank-you" method="get">

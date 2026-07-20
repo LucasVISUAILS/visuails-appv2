@@ -1,48 +1,43 @@
 <script>
-  // VISUAILS — Gallery. Ported from /tmp/visuails-web/gallery.html.
-  // Style-sample grid with a category filter. Uses ProductScene placeholders
-  // (photo prop only where the source had a real background-image url);
-  // no lightbox/dialog — items are decorative, not links, matching the
-  // source (the vis tiles in gallery.html weren't wrapped in <a>).
+  // VISUAILS — Gallery. v2 redesign: almost entirely the real photo library
+  // in a grid (see DESIGN.md "Homepage principle" / IMAGES.md) instead of
+  // ProductScene placeholders. Filter categories now map to the real photo
+  // categories that exist (banners + the 4 lifestyle styles) rather than the
+  // old catalog/lifestyle/video service split, since there's no real catalog
+  // photography in the library (see IMAGES.md).
   import { reveal } from '$lib/actions/reveal.js';
-  import ProductScene from '$lib/components/site/ProductScene.svelte';
 
-  const items = [
-    { tag: 'catalog', icon: 'bottle', width: '40%', badge: 'Catalog · Classic' },
-    { tag: 'lifestyle', icon: 'jar', width: '46%', badge: 'Lifestyle · Glow', photo: '/img/lifestyle-glow-04.webp' },
-    { tag: 'video', icon: 'sneaker', width: '56%', badge: 'Video · Motion' },
-    { tag: 'catalog', icon: 'bag', width: '46%', badge: 'Catalog · Custom' },
-    { tag: 'lifestyle', icon: 'bottle', width: '42%', badge: 'Lifestyle · Fresh', photo: '/img/lifestyle-dunes-01.webp' },
-    { tag: 'catalog', icon: 'jar', width: '46%', badge: 'Catalog · Clean' },
-    { tag: 'video', icon: 'bag', width: '44%', badge: 'Video · Loop' },
-    { tag: 'lifestyle', icon: 'sneaker', width: '56%', badge: 'Lifestyle · Flash', photo: '/img/lifestyle-flash-04.webp' },
-    { tag: 'catalog', icon: 'bottle', width: '42%', badge: 'Catalog · Studio' },
-    { tag: 'lifestyle', icon: 'jar', width: '46%', badge: 'Lifestyle · Warm', photo: '/img/lifestyle-phone-made-11.webp' },
-    { tag: 'video', icon: 'bottle', width: '40%', badge: 'Video · Reveal' },
-    { tag: 'catalog', icon: 'bag', width: '44%', badge: 'Catalog · Minimal' },
-  ];
+  const photos = [
+    ...Array.from({ length: 8 }, (_, i) => ({ src: `/img/banners-0${i + 1}.webp`, tag: 'campaign', alt: `Campaign photography ${i + 1}` })),
+    { src: '/img/lifestyle-dunes-01.webp', tag: 'dunes', alt: 'Dunes-style lifestyle visual' },
+    { src: '/img/lifestyle-dunes-02.webp', tag: 'dunes', alt: 'Dunes-style lifestyle visual' },
+    ...Array.from({ length: 8 }, (_, i) => ({ src: `/img/lifestyle-flash-0${i + 1}.webp`, tag: 'flash', alt: `Flash-style lifestyle visual ${i + 1}` })),
+    ...Array.from({ length: 6 }, (_, i) => ({ src: `/img/lifestyle-glow-0${i + 1}.webp`, tag: 'glow', alt: `Glow-style lifestyle visual ${i + 1}` })),
+    ...Array.from({ length: 14 }, (_, i) => ({ src: `/img/lifestyle-phone-made-${String(i + 1).padStart(2, '0')}.webp`, tag: 'phone-made', alt: `Phone-made-style lifestyle visual ${i + 1}` })),
+  ].map((p, i) => ({ ...p, wide: i % 7 === 0 }));
 
   const filters = [
     { key: 'all', label: 'All' },
-    { key: 'catalog', label: 'Catalog' },
-    { key: 'lifestyle', label: 'Lifestyle' },
-    { key: 'video', label: 'Video' },
+    { key: 'campaign', label: 'Campaign' },
+    { key: 'dunes', label: 'Dunes' },
+    { key: 'flash', label: 'Flash' },
+    { key: 'glow', label: 'Glow' },
+    { key: 'phone-made', label: 'Phone-made' },
   ];
 
   let active = $state('all');
-  let filtered = $derived(active === 'all' ? items : items.filter((i) => i.tag === active));
+  let filtered = $derived(active === 'all' ? photos : photos.filter((p) => p.tag === active));
 </script>
 
 <svelte:head>
   <title>VISUAILS — A look at the styles we produce</title>
-  <meta name="description" content="Style samples from VISUAILS across catalog, lifestyle and video. Get a feel for the range — then start with a free test sample and see your own product transformed." />
+  <meta name="description" content="The real VISUAILS photo library — campaign, Dunes, Flash, Glow and Phone-made lifestyle visuals. Get a feel for the range, then start with a free test sample." />
 </svelte:head>
 
 <section class="page-hero">
   <div class="container">
     <p class="eyebrow-page">Gallery</p>
     <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem)">A look at the styles we produce</h1>
-    <p class="lead" style="margin-top:1.2rem">A feel for the range — clean catalog, editorial lifestyle, and video. New brand? Start with a free test sample and see your own product transformed.</p>
     <div class="flex" style="margin-top:1.8rem">
       <a href="/test-sample" class="btn btn-primary btn-lg">Free test sample</a>
       <a href="/order" class="btn btn-ghost btn-lg">Order now</a>
@@ -50,22 +45,18 @@
   </div>
 </section>
 
-<!-- FILTERABLE GALLERY -->
+<!-- THE LIBRARY -->
 <section>
   <div class="container">
-    <p class="pill-note" style="margin-bottom:1.4rem">These are style samples that show the range we produce — not client case studies. We're a new studio, so nothing here is dressed up as someone else's results.</p>
-
     <div class="filter-bar" role="group" aria-label="Filter styles">
       {#each filters as f}
         <button type="button" aria-pressed={active === f.key} onclick={() => (active = f.key)}>{f.label}</button>
       {/each}
     </div>
 
-    <div class="gallery-grid">
-      {#each filtered as item (item.badge)}
-        <div class="reveal pending" use:reveal>
-          <ProductScene photo={item.photo} icon={item.icon} width={item.width} badge={item.badge} />
-        </div>
+    <div class="photo-grid">
+      {#each filtered as p (p.src)}
+        <img src={p.src} alt={p.alt} loading="lazy" class={p.wide ? 'wide' : ''} />
       {/each}
     </div>
   </div>
@@ -76,7 +67,7 @@
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">See your own product<br />in <em>this range.</em></h2>
-      <p class="lead" style="margin:1.2rem auto 0;text-align:center">The best way to judge the quality is on your own product. Start with a free test sample — one per business, no card needed.</p>
+      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Start with a free test sample — one per business, no card needed.</p>
       <div class="flex" style="justify-content:center;margin-top:2rem">
         <a href="/test-sample" class="btn btn-primary btn-lg">Free test sample</a>
         <a href="/order" class="btn btn-ghost btn-lg">Order now</a>
@@ -90,13 +81,10 @@
 </section>
 
 <style>
-  /* Gallery-page-only patterns: filter pills + auto-fill tile grid. */
-  .pill-note { display: inline-flex; align-items: center; gap: .5rem; padding: .45rem 1rem; border-radius: var(--r-pill); border: 1px solid var(--line); color: var(--ink-3); font-size: .82rem; font-weight: 500; }
-
+  /* Gallery-page-only patterns: filter pills. The tile grid itself is the
+     shared .photo-grid pattern from app.css (see DESIGN.md "Components"). */
   .filter-bar { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.8rem; }
   .filter-bar button { font: inherit; cursor: pointer; color: var(--ink-2); background: transparent; border: 1px solid var(--line); border-radius: var(--r-pill); padding: .5rem 1.1rem; font-size: .9rem; font-weight: 500; transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease), background var(--dur) var(--ease); }
   .filter-bar button:hover { color: var(--ink); border-color: var(--accent-line); }
   .filter-bar button[aria-pressed="true"] { color: #fff; background: var(--accent); border-color: transparent; }
-
-  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.1rem; }
 </style>

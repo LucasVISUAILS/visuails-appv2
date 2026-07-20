@@ -12,7 +12,7 @@
 <section class="page-hero"><div class="container">
   <span class="eyebrow-page">Getting the best results</span>
   <h1 class="display" style="font-size:clamp(2.2rem,4.6vw,3.6rem)">How to shoot photos we can work magic with</h1>
-  <p class="lead" style="margin-top:1.1rem">You don't need a studio — just a clear photo. A few simple habits make your visuals sharper, more accurate and faster to produce.</p>
+  <p class="lead" style="margin-top:1.1rem">You don't need a studio — just a clear photo and a few simple habits.</p>
   <div class="flex" style="margin-top:1.8rem">
     <a href="/test-sample" class="btn btn-primary btn-lg">Try a free test sample</a>
     <a href="/order" class="btn btn-ghost btn-lg">Start an order</a>

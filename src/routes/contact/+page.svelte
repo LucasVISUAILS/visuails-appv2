@@ -16,12 +16,18 @@
   <meta name="description" content="Questions about an order, support, or a custom request? Message VISUAILS on WhatsApp or email hello@visuails.com — we usually reply within the hour." />
 </svelte:head>
 
-<!-- HERO -->
+<!-- HERO — real photo beside a short line, not a text wall. -->
 <section class="page-hero">
   <div class="container">
-    <span class="eyebrow-page">Contact</span>
-    <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem)">Let's grow together</h1>
-    <p class="lead" style="margin-top:1.2rem">A question about your order, need support, or a custom request? Send us a message and we'll get back to you as soon as possible.</p>
+    <div class="photo-split reverse">
+      <div class="photo-split-media">
+        <img src="/img/lifestyle-glow-03.webp" alt="A VISUAILS lifestyle visual" loading="lazy" />
+      </div>
+      <div>
+        <h1 class="display" style="font-size:clamp(2.4rem,5vw,4rem)">Let's grow <em>together</em>.</h1>
+        <p class="lead" style="margin-top:1rem">A question, or a custom request? Send a message — a real person reads every one.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -31,15 +37,11 @@
 
     <!-- Left: channels -->
     <div class="reveal pending contact-stack" use:reveal>
-      <div>
-        <span class="kicker">Talk to us</span>
-        <h2 style="margin-top:.8rem">The fastest way to reach us</h2>
-        <p style="margin-top:1rem;color:var(--ink-3);max-width:66ch">Prefer chat, email, or a quick form? Whatever suits you — a real person reads every message.</p>
-      </div>
+      <h2>The fastest way to reach us</h2>
 
       <div class="card">
         <h3>WhatsApp</h3>
-        <p style="margin-top:.5rem;color:var(--ink-3)">Usually replies within the hour. The quickest route for orders, questions and custom requests.</p>
+        <p style="margin-top:.5rem;color:var(--ink-3)">Usually replies within the hour.</p>
         <p style="margin-top:.6rem"><strong>+31 6 25436130</strong></p>
         <a href="https://wa.me/31625436130?text=Hi%20VISUAILS%2C%20I%20have%20a%20question." class="btn btn-wa" style="margin-top:1rem" target="_blank" rel="noopener">
           <svg class="i" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-4-1L3 20l1.5-4.5A8.38 8.38 0 0 1 3.5 11 8.5 8.5 0 0 1 12 3a8.38 8.38 0 0 1 8.5 8.5z"/></svg>
@@ -71,7 +73,7 @@
     <div class="reveal pending" use:reveal>
       <div class="card">
         <h2 style="font-size:1.5rem">Send a message</h2>
-        <p style="margin-top:.5rem;color:var(--ink-3);font-size:.95rem">We'll reply by your preferred channel, usually the same day.</p>
+        <p style="margin-top:.5rem;color:var(--ink-3);font-size:.95rem">We'll reply the same day, by your preferred channel.</p>
 
         <!-- No backend yet (static site, no server) — see file-top note. -->
         <form action="/thank-you" method="get" style="margin-top:1.6rem" novalidate>
@@ -121,8 +123,8 @@
 <section class="section-tight">
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
-      <h2 class="display" style="font-size:clamp(2rem,4.5vw,3.2rem)">Rather see it first?</h2>
-      <p class="lead" style="margin:1.2rem auto 0;text-align:center">Try a free test sample — one photo in, a finished visual out. No card needed.</p>
+      <h2 class="display" style="font-size:clamp(2rem,4.5vw,3.2rem)">Rather see it <em>first</em>?</h2>
+      <p class="lead" style="margin:1.2rem auto 0;text-align:center">One photo in, a finished visual out. No card needed.</p>
       <div class="flex" style="justify-content:center;margin-top:2rem">
         <a href="/test-sample" class="btn btn-primary btn-lg">Free test sample</a>
         <a href="/pricing" class="btn btn-ghost btn-lg">See pricing</a>
