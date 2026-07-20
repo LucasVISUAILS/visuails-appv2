@@ -1,23 +1,22 @@
 <script>
-  // VISUAILS — Models hub. v2 redesign: leads with the real model portraits
-  // (model-01/02/03) instead of text-only monogram avatars, one eyebrow max,
-  // copy cut hard. The monogram roster stays for the functional "pick a
-  // model" grid — there's no unique real photo for all 10 library entries,
-  // only 3 example portraits, so those 3 carry the photography up top.
+  // VISUAILS — Models hub. v2 redesign: leads with real model portraits
+  // (model-01/02/03) plus, in the roster grid below, a real photo for every
+  // one of the 10 standard models (see IMAGES.md — Models/VISUAILS Models),
+  // replacing the earlier placeholder letter-monogram roster.
   import { reveal } from '$lib/actions/reveal.js';
   import { magnetic } from '$lib/actions/magnetic.js';
 
   const standardModels = [
-    { initial: 'A', name: 'Aaron', traits: ['Warm', 'Approachable'] },
-    { initial: 'A', name: 'Ava', traits: ['Editorial', 'Elegant'] },
-    { initial: 'E', name: 'Elias', traits: ['Refined', 'Classic'] },
-    { initial: 'R', name: 'Ryan', traits: ['Sporty', 'Energetic'] },
-    { initial: 'L', name: 'Lila', traits: ['Playful', 'Fresh'] },
-    { initial: 'S', name: 'Sam', traits: ['Casual', 'Everyday'] },
-    { initial: 'M', name: 'Morgan', traits: ['Minimal', 'Modern'] },
-    { initial: 'D', name: 'Dasha', traits: ['High-fashion', 'Bold'] },
-    { initial: 'R', name: 'Rose', traits: ['Soft', 'Natural'] },
-    { initial: 'N', name: 'Noa', traits: ['Clean', 'Contemporary'] },
+    { photo: '/img/model-aaron.webp', name: 'Aaron', traits: ['Warm', 'Approachable'] },
+    { photo: '/img/model-ava.webp', name: 'Ava', traits: ['Editorial', 'Elegant'] },
+    { photo: '/img/model-elias.webp', name: 'Elias', traits: ['Refined', 'Classic'] },
+    { photo: '/img/model-ryan.webp', name: 'Ryan', traits: ['Sporty', 'Energetic'] },
+    { photo: '/img/model-dana.webp', name: 'Dana', traits: ['Confident', 'Modern'] },
+    { photo: '/img/model-lisa.webp', name: 'Lisa', traits: ['Natural', 'Approachable'] },
+    { photo: '/img/model-maegan.webp', name: 'Maegan', traits: ['Bold', 'Statement'] },
+    { photo: '/img/model-rae.webp', name: 'Rae', traits: ['Soft', 'Understated'] },
+    { photo: '/img/model-fabi.webp', name: 'Fabi', traits: ['Clean', 'Contemporary'] },
+    { photo: '/img/model-seme.webp', name: 'Seme', traits: ['Sharp', 'Editorial'] },
   ];
 
   const steps = [
@@ -47,7 +46,7 @@
         <a href="/order-custom" class="btn btn-ghost btn-lg">Request a custom model</a>
       </div>
     </div>
-    <div class="photo-split-media" style="aspect-ratio:4/5">
+    <div class="photo-split-media">
       <img src="/img/model-01.webp" alt="A VISUAILS model portrait" loading="lazy" />
     </div>
   </div>
@@ -71,7 +70,7 @@
     <div class="grid models-grid">
       {#each standardModels as m}
         <div class="card card-hover model-card reveal pending" use:reveal>
-          <div class="monogram" aria-hidden="true">{m.initial}</div>
+          <img src={m.photo} alt="{m.name}, a VISUAILS standard model" class="model-avatar" loading="lazy" />
           <h3>{m.name}</h3>
           <div class="chip-row">
             {#each m.traits as t}<span class="chip"><span class="dot"></span>{t}</span>{/each}
@@ -158,7 +157,7 @@
 </section>
 
 <!-- CLOSING CTA -->
-<section>
+<section class="section-tight">
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">One face. Every visual.<br />Perfectly <em>consistent.</em></h2>
@@ -183,6 +182,7 @@
   .model-card { display: flex; flex-direction: column; gap: .9rem; }
   .model-choose { border-color: var(--accent-line); }
 
+  .model-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line-strong); }
   .monogram {
     width: 60px; height: 60px; border-radius: 50%;
     display: grid; place-items: center;

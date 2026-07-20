@@ -20,7 +20,7 @@
     { initial: 'B', name: 'Bold colour-block', body: 'Saturated wardrobe, unmistakable at thumbnail size.' },
   ];
 
-  const examples = ['/img/custom-models-01.webp', '/img/custom-models-02.webp', '/img/custom-models-03.webp'];
+  const examples = ['/img/custom-models-01.webp', '/img/custom-models-02.webp', '/img/custom-models-03.webp', '/img/custom-models-04.webp', '/img/custom-models-05.webp'];
 
   const steps = [
     { n: '01', title: 'Intake', body: 'You share references and a brief on the look you want.' },
@@ -56,7 +56,7 @@
         <span class="trust-item"><strong>Locked</strong> forever, reused free</span>
       </div>
     </div>
-    <div class="photo-split-media" style="aspect-ratio:4/5">
+    <div class="photo-split-media">
       <img src="/img/custom-models-03.webp" alt="A VISUAILS custom model portrait" loading="lazy" />
     </div>
   </div>
@@ -156,7 +156,7 @@
 </section>
 
 <!-- CLOSING CTA -->
-<section>
+<section class="section-tight">
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Design the face of <em>your</em> brand.</h2>

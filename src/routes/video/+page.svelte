@@ -27,9 +27,10 @@
   <meta name="description" content="8-second, clean product videos with subtle motion — made for product pages, social and simple ads. Human-reviewed and delivered in ~24 hours. Standard product videos from €49; larger campaigns on quote." />
 </svelte:head>
 
-<!-- HERO — full-bleed real photo, one line, one button. -->
-<section class="hero-editorial" style="min-height:82vh">
-  <div class="bg" style="background-image:url('/img/banners-07.webp')"></div>
+<!-- HERO — compact tier (documented in app.css, not an ad-hoc inline
+     height), and a photo not already used as another page's hero. -->
+<section class="hero-editorial compact">
+  <div class="bg" style="background-image:url('/img/banners-03.webp')"></div>
   <div class="fade"></div>
   <div class="hero-editorial-content container">
     <h1 class="display" style="font-size:clamp(2.8rem,6.5vw,5.4rem)">Short product videos<br />that <em>move</em>.</h1>
@@ -56,7 +57,7 @@
     <div class="grid grid-3">
       {#each videoStyles as s}
         <a href="/video/{s.slug}" class="reveal pending" use:reveal style="display:block">
-          <div class="photo-band" style="aspect-ratio:3/4">
+          <div class="photo-band tall">
             <img src={posters[s.slug]} alt="{s.name} example" loading="lazy" />
             <div class="scrim"></div>
             <div class="caption">
@@ -111,7 +112,7 @@
 </section>
 
 <!-- Closing CTA -->
-<section>
+<section class="section-tight">
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Give your product<br>a little movement.</h2>

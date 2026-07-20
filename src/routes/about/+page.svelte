@@ -18,8 +18,9 @@
   <meta name="description" content="VISUAILS is a product-visual studio that combines modern production speed with human judgement, so any brand can get studio-quality product visuals in about a day. Based in Enschede, Netherlands." />
 </svelte:head>
 
-<!-- HERO — full-bleed real photo, one line. -->
-<section class="hero-editorial">
+<!-- HERO — compact tier: a lighter, text-driven page doesn't need the
+     homepage's full 100vh opening. -->
+<section class="hero-editorial compact">
   <div class="bg" style="background-image:url('/img/banners-07.webp')"></div>
   <div class="fade"></div>
   <div class="hero-editorial-content container">
@@ -90,7 +91,7 @@
 </section>
 
 <!-- CTA -->
-<section>
+<section class="section-tight">
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Let's grow <em>together</em>.</h2>

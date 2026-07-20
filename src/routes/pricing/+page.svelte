@@ -194,7 +194,7 @@
 </section>
 
 <!-- CLOSING CTA -->
-<section>
+<section class="section-tight">
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Transparent pricing.<br />No <em>surprises.</em></h2>

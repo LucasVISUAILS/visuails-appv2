@@ -39,13 +39,15 @@
   </div>
 </section>
 
-<!-- THE OFFER — one line, then the photo does the rest. -->
+<!-- THE OFFER — a small paired moment, not another full-width banner. -->
 <section class="section-tight">
   <div class="container">
-    <div class="reveal-mask photo-moment-frame" use:reveal={{ variant: 'mask' }}>
-      <div class="rm-inner" style="background-image:url('/img/lifestyle-glow-02.webp')"></div>
+    <div class="offer-moment">
+      <div class="reveal-mask photo-moment-frame" use:reveal={{ variant: 'mask' }}>
+        <div class="rm-inner" style="background-image:url('/img/lifestyle-glow-02.webp')"></div>
+      </div>
+      <p class="lead">One product photo in. A publish-ready campaign out, in about 24 hours.</p>
     </div>
-    <p class="lead" style="margin-top:1.4rem;max-width:38ch">One product photo in. A publish-ready campaign out, in about 24 hours.</p>
   </div>
 </section>
 
@@ -56,7 +58,7 @@
     <div class="grid grid-3">
       {#each services as s}
         <a href={s.href} class="reveal pending" use:reveal style="display:block">
-          <div class="photo-band" style="aspect-ratio:3/4">
+          <div class="photo-band tall">
             <img src={s.photo} alt="{s.name} example" loading="lazy" />
             <div class="scrim"></div>
             <div class="caption">

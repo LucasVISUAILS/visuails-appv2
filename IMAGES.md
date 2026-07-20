@@ -28,14 +28,35 @@ pages, before/after "before" states) where no real photo applies.
   (the homepage's models section, custom-models hero, etc.) — pick
   whichever of the two versions fits the aspect ratio of the slot you're
   filling.
+- **`custom-models-04.webp`, `-05.webp`** (2) — two more real custom-model
+  examples (added later), square-cropped like `-01`–`-03`. Used in the
+  "Real output, not a mockup" grid on `/custom-models`.
+- **`model-aaron.webp`, `model-ava.webp`, `model-dana.webp`,
+  `model-elias.webp`, `model-fabi.webp`, `model-lisa.webp`,
+  `model-maegan.webp`, `model-rae.webp`, `model-ryan.webp`,
+  `model-seme.webp`** (10) — real, named standard-model headshots (square
+  crop, 480x480), one per model in the `/models` "Standard models" roster.
+  These replaced the earlier placeholder letter-monogram avatars.
+- **`catalog-before.webp`, `catalog-after.webp`** (2) — a real before/after
+  pair for the `/catalog` page's compare slider: a raw phone photo of a
+  garment on a table (before) and the same garment as a clean flat-lay
+  catalog shot (after). This is the one real "clean product" pair
+  available — use it instead of `ProductScene` wherever this exact
+  before/after moment appears.
+- **`logo-mark.png`** — the orange VISUAILS "V" mark, transparent
+  background, used small (~20px) next to the wordmark in the header and
+  footer brand links. Also the source for the favicon set in `static/`
+  (`favicon.ico`, `favicon-32/48/192/512.png`, `apple-touch-icon.png`) —
+  orange mark on white, per brand.
 
-There is **no dedicated "clean product on white" catalog photography** in
-this set (everything here is lifestyle/campaign/portrait) — for catalog
-pages specifically, keep using the `ProductScene` SVG-icon placeholder
-system (`icon="bottle|sneaker|jar|bag"`), since that's a closer match to
-"your product, shot cleanly" than repurposing a moody lifestyle photo would
-be. For video pages, reusing `banners-*` or a relevant `lifestyle-*` still
-as a thumbnail/poster image is fine and encouraged.
+Aside from catalog's before/after pair above, there is still **no dedicated
+"clean product on white" catalog photography** in this set (everything else
+here is lifestyle/campaign/portrait) — for other catalog moments, keep
+using the `ProductScene` SVG-icon placeholder system
+(`icon="bottle|sneaker|jar|bag"`), since that's a closer match to "your
+product, shot cleanly" than repurposing a moody lifestyle photo would be.
+For video pages, reusing `banners-*` or a relevant `lifestyle-*` still as a
+thumbnail/poster image is fine and encouraged.
 
 Any `/img/` path NOT in the list above will 404 in production — svelte.config.js
 is configured to warn (not fail the build) on a missing `/img/` asset, but

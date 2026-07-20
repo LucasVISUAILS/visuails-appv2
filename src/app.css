@@ -142,7 +142,12 @@ section { padding-block: clamp(4.5rem, 9vw, 9rem); position: relative; }
 
 .link-arrow { display: inline-flex; align-items: center; gap: .45rem; color: var(--ink); font-weight: 600; }
 .link-arrow:hover { color: var(--accent-bright); }
-.i { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+/* Icon default size — bug fix: an <svg> with a viewBox but no width/height
+   attribute (most icons in this codebase, incl. every WhatsApp icon) falls
+   back to the browser's ~300x150px replaced-element default with nothing
+   here to constrain it, which is what made buttons render oversized.
+   Callers that need a different size still win via their inline style. */
+.i { width: 20px; height: 20px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
 /* Photo band — v2's default homepage/page pattern (see DESIGN.md "Components").
    A full-bleed or large-format photo with a short headline, either
@@ -187,6 +192,9 @@ section { padding-block: clamp(4.5rem, 9vw, 9rem); position: relative; }
 
 .page-hero { padding-top: clamp(3rem, 6vw, 5rem); padding-bottom: clamp(2rem, 4vw, 3rem); position: relative; }
 .page-hero .display { max-width: 22ch; }
+/* Shared hero heading scale for every page-hero page — was previously
+   hand-copied as an inline style on ~10 pages with 3 drifting values. */
+.page-hero h1 { font-size: clamp(2.4rem, 5vw, 4rem); }
 
 .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem,3vw,3rem); }
 @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
@@ -260,8 +268,18 @@ section { padding-block: clamp(4.5rem, 9vw, 9rem); position: relative; }
 @media (max-width: 700px) { .hero-editorial { min-height: 92vh; } .hero-editorial-cue { display: none; } }
 @media (prefers-reduced-motion: reduce) { .hero-editorial-cue .cue-line { animation: none; } }
 
-.photo-moment-frame { aspect-ratio: 16/8; border-radius: var(--r-media); overflow: hidden; }
-@media (max-width: 700px) { .photo-moment-frame { aspect-ratio: 4/5; } }
+/* Compact hero tier — for secondary pages whose content doesn't carry a
+   full 100vh opening (about, how-it-works, video). Documented tier instead
+   of the one-off inline min-height each of these pages used to hand-roll. */
+.hero-editorial.compact { min-height: 70vh; }
+@media (max-width: 700px) { .hero-editorial.compact { min-height: 64vh; } }
+
+/* Offer moment (homepage only) — a small paired photo + one-line claim,
+   deliberately NOT another full-width banner stacked under the hero. */
+.offer-moment { display: flex; align-items: center; gap: clamp(2rem, 5vw, 4rem); }
+.offer-moment .photo-moment-frame { flex: 0 0 clamp(220px, 30vw, 380px); aspect-ratio: 4/5; border-radius: var(--r-media); overflow: hidden; }
+.offer-moment .lead { flex: 1 1 auto; max-width: 38ch; margin-top: 0; }
+@media (max-width: 700px) { .offer-moment { flex-direction: column; align-items: flex-start; gap: 1.4rem; } .offer-moment .photo-moment-frame { flex-basis: auto; width: min(60vw, 320px); } }
 .reveal-mask { position: relative; overflow: hidden; }
 .reveal-mask .rm-inner { position: absolute; inset: 0; background-size: cover; background-position: center; transform: scale(1.18); transition: transform 1.4s var(--ease); }
 .reveal-mask.in .rm-inner { transform: scale(1); }

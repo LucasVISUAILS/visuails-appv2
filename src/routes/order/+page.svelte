@@ -57,7 +57,7 @@
 </section>
 
 <!-- CTA BAND -->
-<section>
+<section class="section-tight">
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Not sure which fits?</h2>

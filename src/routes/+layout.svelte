@@ -87,7 +87,10 @@
 
 <header class="site-header" class:scrolled>
   <div class="container nav">
-    <a href="/" class="brand" aria-label="VISUAILS home"><span class="brand-word">VIS<span class="u">U</span>AILS</span></a>
+    <a href="/" class="brand" aria-label="VISUAILS home">
+      <img src="/img/logo-mark.png" alt="" class="brand-mark" width="20" height="20" />
+      <span class="brand-word">VIS<span class="u">U</span>AILS</span>
+    </a>
     <nav aria-label="Primary" class="primary-nav">
       <ul class="nav-links">
         <li class="has-menu">
@@ -135,7 +138,10 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="/" class="brand"><span class="brand-word">VIS<span class="u">U</span>AILS</span></a>
+        <a href="/" class="brand">
+          <img src="/img/logo-mark.png" alt="" class="brand-mark" width="20" height="20" />
+          <span class="brand-word">VIS<span class="u">U</span>AILS</span>
+        </a>
         <p>A product-visual studio for modern e-commerce brands — for founders who would rather grow than book another shoot.</p>
       </div>
       <div class="footer-col">
@@ -189,7 +195,9 @@
   .site-header { position: sticky; top: 0; z-index: var(--z-sticky); transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease); }
   .site-header.scrolled { background: rgba(15,14,12,.82); backdrop-filter: blur(16px); box-shadow: 0 1px 0 var(--line); }
   .nav { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; height: 76px; }
-  .brand { font-family: var(--font-body); font-weight: 800; font-size: 1.26rem; color: var(--ink); display: inline-flex; align-items: center; }
+  .brand { font-family: var(--font-body); font-weight: 800; font-size: 1.26rem; color: var(--ink); display: inline-flex; align-items: center; gap: .5rem; }
+  .brand-mark { width: 20px; height: auto; flex: 0 0 auto; display: block; }
+  .brand .u { color: var(--accent); }
   .nav-links { display: flex; align-items: center; gap: .1rem; list-style: none; margin: 0; padding: 0; }
   .nav-links > li > a, .nav-trigger { display: inline-flex; align-items: center; gap: .35rem; padding: .55rem .8rem; border-radius: var(--r-pill); font-size: .92rem; font-weight: 500; color: var(--ink-2); background: none; border: none; cursor: pointer; transition: color .22s var(--ease); }
   .nav-links > li > a:hover, .nav-trigger:hover { color: var(--ink); }

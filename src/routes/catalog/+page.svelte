@@ -119,9 +119,9 @@
     <div style="max-width:640px;margin:0 auto;text-align:center">
       <div class="reveal-clip-wrap" use:reveal={{ variant: 'clip' }}>
         <div class="reveal-clip-inner">
-          <div class="ba" use:compare aria-label="Before and after: a raw bottle photo transformed into a clean catalog visual">
-            <div class="ba-layer ba-before-scene" aria-hidden="true"><ProductScene icon="bottle" width="42%" /></div>
-            <div class="ba-layer ba-after" aria-hidden="true"><ProductScene icon="bottle" width="42%" /></div>
+          <div class="ba" use:compare aria-label="Before and after: a raw phone photo transformed into a clean catalog visual">
+            <div class="ba-layer ba-before-scene" aria-hidden="true"><img src="/img/catalog-before.webp" alt="A raw phone photo of a t-shirt on a table before VISUAILS" /></div>
+            <div class="ba-layer ba-after" aria-hidden="true"><img src="/img/catalog-after.webp" alt="The same t-shirt as a clean catalog visual after VISUAILS" /></div>
             <span class="ba-tag tag-before">Before</span>
             <span class="ba-tag tag-after">After</span>
             <div class="ba-handle" aria-hidden="true"></div>
@@ -169,7 +169,7 @@
 </section>
 
 <!-- Closing CTA -->
-<section>
+<section class="section-tight">
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Build a catalog that<br>looks like one brand.</h2>

@@ -18,8 +18,9 @@
   <meta name="description" content="From one product photo to publish-ready catalog, lifestyle and video visuals — generated, human-reviewed and delivered in about 24 hours." />
 </svelte:head>
 
-<!-- HERO — full-bleed real photo, one line. -->
-<section class="hero-editorial">
+<!-- HERO — compact tier: a lighter, text-driven page doesn't need the
+     homepage's full 100vh opening. -->
+<section class="hero-editorial compact">
   <div class="bg" style="background-image:url('/img/banners-04.webp')"></div>
   <div class="fade"></div>
   <div class="hero-editorial-content container">
@@ -111,7 +112,7 @@
 </section>
 
 <!-- CTA -->
-<section>
+<section class="section-tight">
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2rem,4.5vw,3.2rem)">See it on your own product.</h2>

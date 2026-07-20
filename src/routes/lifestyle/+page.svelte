@@ -125,7 +125,7 @@
 </section>
 
 <!-- Closing CTA -->
-<section>
+<section class="section-tight">
   <div class="container">
     <div class="cta-band reveal pending" use:reveal>
       <h2 class="display" style="font-size:clamp(2.2rem,5vw,3.6rem)">Put your product<br>in a scene that sells.</h2>

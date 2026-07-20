@@ -7,7 +7,7 @@
 //     <span class="magnet-inner"><a class="btn btn-primary" href="/order">Order now</a></span>
 //   </span>
 
-export function magnetic(node, { strength = 0.4, range = 80 } = {}) {
+export function magnetic(node, { strength = 0.15, range = 46, max = 8 } = {}) {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce || !window.matchMedia('(hover: hover)').matches) {
     return { destroy() {} };
@@ -22,9 +22,15 @@ export function magnetic(node, { strength = 0.4, range = 80 } = {}) {
     const dx = e.clientX - cx;
     const dy = e.clientY - cy;
     const dist = Math.hypot(dx, dy);
-    inner.style.transform = dist < range + r.width / 2
-      ? `translate(${dx * strength}px, ${dy * strength}px)`
-      : 'translate(0,0)';
+    if (dist < range + r.width / 2) {
+      // Clamp so the button only ever nudges a few px toward the cursor —
+      // a subtle acknowledgement, not a visible float across the layout.
+      const tx = Math.max(-max, Math.min(max, dx * strength));
+      const ty = Math.max(-max, Math.min(max, dy * strength));
+      inner.style.transform = `translate(${tx}px, ${ty}px)`;
+    } else {
+      inner.style.transform = 'translate(0,0)';
+    }
   }
   function onLeave() { inner.style.transform = 'translate(0,0)'; }
 
